@@ -1,0 +1,1393 @@
+{
+ "skills": [
+  {
+   "name": "Python programming",
+   "family": "prog",
+   "aliases": "python, pandas, numpy",
+   "related": [
+    "R programming",
+    "Java programming"
+   ]
+  },
+  {
+   "name": "R programming",
+   "family": "prog",
+   "aliases": "r, rstudio, tidyverse",
+   "related": [
+    "Python programming"
+   ]
+  },
+  {
+   "name": "Java programming",
+   "family": "prog",
+   "aliases": "java, jvm, spring",
+   "related": [
+    "C/C++ programming",
+    "Object-oriented design"
+   ]
+  },
+  {
+   "name": "C/C++ programming",
+   "family": "prog",
+   "aliases": "c, c++, cpp",
+   "related": [
+    "Java programming",
+    "Embedded systems & IoT"
+   ]
+  },
+  {
+   "name": "JavaScript / TypeScript",
+   "family": "prog",
+   "aliases": "javascript, typescript, node, react",
+   "related": [
+    "Frontend web development"
+   ]
+  },
+  {
+   "name": "Object-oriented design",
+   "family": "prog",
+   "aliases": "oop, uml, design patterns, object oriented",
+   "related": [
+    "Software architecture",
+    "Java programming"
+   ]
+  },
+  {
+   "name": "Data structures & algorithms",
+   "family": "prog",
+   "aliases": "algorithms, data structure, dsa, complexity",
+   "related": [
+    "Discrete mathematics"
+   ]
+  },
+  {
+   "name": "Software testing",
+   "family": "prog",
+   "aliases": "testing, qa, quality assurance, unit testing, test cases",
+   "related": [
+    "Test automation",
+    "Model evaluation & validation"
+   ]
+  },
+  {
+   "name": "Test automation",
+   "family": "prog",
+   "aliases": "selenium, pytest, junit, automation testing",
+   "related": [
+    "Software testing",
+    "CI/CD pipelines"
+   ]
+  },
+  {
+   "name": "Requirements engineering",
+   "family": "prog",
+   "aliases": "requirements, srs, use cases, user stories",
+   "related": [
+    "Business analysis",
+    "User research"
+   ]
+  },
+  {
+   "name": "Software architecture",
+   "family": "prog",
+   "aliases": "architecture, microservices, system design",
+   "related": [
+    "Object-oriented design",
+    "Distributed systems"
+   ]
+  },
+  {
+   "name": "Version control (Git)",
+   "family": "prog",
+   "aliases": "git, github, gitlab",
+   "related": [
+    "CI/CD pipelines"
+   ]
+  },
+  {
+   "name": "Agile / Scrum",
+   "family": "prog",
+   "aliases": "scrum, kanban, agile",
+   "related": [
+    "Software project management"
+   ]
+  },
+  {
+   "name": "CI/CD pipelines",
+   "family": "prog",
+   "aliases": "continuous integration, jenkins, github actions, ci/cd",
+   "related": [
+    "DevOps practices",
+    "Test automation"
+   ]
+  },
+  {
+   "name": "DevOps practices",
+   "family": "prog",
+   "aliases": "devops, sre, monitoring",
+   "related": [
+    "CI/CD pipelines",
+    "Cloud computing"
+   ]
+  },
+  {
+   "name": "Frontend web development",
+   "family": "prog",
+   "aliases": "html, css, frontend, web design",
+   "related": [
+    "JavaScript / TypeScript",
+    "HCI & UX design"
+   ]
+  },
+  {
+   "name": "Backend & API development",
+   "family": "prog",
+   "aliases": "api, rest, django, flask, backend, php, laravel",
+   "related": [
+    "Frontend web development",
+    "Relational databases"
+   ]
+  },
+  {
+   "name": "Mobile app development",
+   "family": "prog",
+   "aliases": "android, ios, flutter, kotlin, mobile",
+   "related": [
+    "Frontend web development",
+    "Java programming"
+   ]
+  },
+  {
+   "name": "Software project management",
+   "family": "prog",
+   "aliases": "project management, estimation",
+   "related": [
+    "Agile / Scrum",
+    "Team leadership"
+   ]
+  },
+  {
+   "name": "SQL",
+   "family": "data",
+   "aliases": "mysql, postgresql, queries",
+   "related": [
+    "Relational databases"
+   ]
+  },
+  {
+   "name": "Relational databases",
+   "family": "data",
+   "aliases": "rdbms, database, dbms",
+   "related": [
+    "SQL",
+    "Database design & normalisation"
+   ]
+  },
+  {
+   "name": "Database design & normalisation",
+   "family": "data",
+   "aliases": "er diagram, normalization, schema design",
+   "related": [
+    "Relational databases"
+   ]
+  },
+  {
+   "name": "NoSQL databases",
+   "family": "data",
+   "aliases": "mongodb, redis, cassandra, nosql",
+   "related": [
+    "Relational databases"
+   ]
+  },
+  {
+   "name": "Data warehousing & ETL",
+   "family": "data",
+   "aliases": "etl, data warehouse, olap",
+   "related": [
+    "Data pipelines & orchestration",
+    "Relational databases"
+   ]
+  },
+  {
+   "name": "Data pipelines & orchestration",
+   "family": "data",
+   "aliases": "airflow, pipelines, workflow orchestration",
+   "related": [
+    "Data warehousing & ETL",
+    "CI/CD pipelines"
+   ]
+  },
+  {
+   "name": "Big data (Spark, Hadoop)",
+   "family": "data",
+   "aliases": "spark, hadoop, mapreduce, big data",
+   "related": [
+    "Distributed systems",
+    "Data warehousing & ETL"
+   ]
+  },
+  {
+   "name": "Data visualisation",
+   "family": "data",
+   "aliases": "visualization, tableau, power bi, matplotlib, dashboards",
+   "related": [
+    "Data cleaning & wrangling"
+   ]
+  },
+  {
+   "name": "Data cleaning & wrangling",
+   "family": "data",
+   "aliases": "data cleaning, preprocessing, wrangling",
+   "related": [
+    "Python programming",
+    "Data visualisation"
+   ]
+  },
+  {
+   "name": "Probability",
+   "family": "math",
+   "aliases": "probability theory, random variables, distributions",
+   "related": [
+    "Statistical inference",
+    "Bayesian statistics"
+   ]
+  },
+  {
+   "name": "Statistical inference",
+   "family": "math",
+   "aliases": "hypothesis testing, statistics, confidence intervals",
+   "related": [
+    "Probability",
+    "Regression modelling"
+   ]
+  },
+  {
+   "name": "Regression modelling",
+   "family": "math",
+   "aliases": "linear regression, glm, regression",
+   "related": [
+    "Statistical inference",
+    "Machine learning"
+   ]
+  },
+  {
+   "name": "Linear algebra",
+   "family": "math",
+   "aliases": "matrices, vectors, eigenvalues",
+   "related": [
+    "Numerical methods"
+   ]
+  },
+  {
+   "name": "Calculus",
+   "family": "math",
+   "aliases": "differentiation, integration, differential equations",
+   "related": [
+    "Optimisation",
+    "Numerical methods"
+   ]
+  },
+  {
+   "name": "Discrete mathematics",
+   "family": "math",
+   "aliases": "graph theory, logic, combinatorics",
+   "related": [
+    "Data structures & algorithms"
+   ]
+  },
+  {
+   "name": "Numerical methods",
+   "family": "math",
+   "aliases": "numerical analysis, numerical computing",
+   "related": [
+    "Linear algebra",
+    "Optimisation"
+   ]
+  },
+  {
+   "name": "Optimisation",
+   "family": "math",
+   "aliases": "optimization, linear programming, gradient descent, operations research",
+   "related": [
+    "Calculus",
+    "Numerical methods"
+   ]
+  },
+  {
+   "name": "Experimental design & A/B testing",
+   "family": "math",
+   "aliases": "ab testing, a/b testing, experiment design, doe",
+   "related": [
+    "Statistical inference",
+    "Research methods"
+   ]
+  },
+  {
+   "name": "Time series analysis",
+   "family": "math",
+   "aliases": "forecasting, arima, time series",
+   "related": [
+    "Regression modelling"
+   ]
+  },
+  {
+   "name": "Bayesian statistics",
+   "family": "math",
+   "aliases": "bayesian, mcmc",
+   "related": [
+    "Probability"
+   ]
+  },
+  {
+   "name": "Machine learning",
+   "family": "ai",
+   "aliases": "scikit-learn, classification, supervised learning, ml",
+   "related": [
+    "Deep learning",
+    "Regression modelling"
+   ]
+  },
+  {
+   "name": "Deep learning",
+   "family": "ai",
+   "aliases": "neural networks, pytorch, tensorflow, keras, cnn",
+   "related": [
+    "Machine learning"
+   ]
+  },
+  {
+   "name": "Natural language processing",
+   "family": "ai",
+   "aliases": "nlp, text mining, transformers",
+   "related": [
+    "LLMs & prompt engineering",
+    "Deep learning"
+   ]
+  },
+  {
+   "name": "Computer vision",
+   "family": "ai",
+   "aliases": "image processing, opencv, object detection",
+   "related": [
+    "Deep learning"
+   ]
+  },
+  {
+   "name": "Reinforcement learning",
+   "family": "ai",
+   "aliases": "rl, q-learning",
+   "related": [
+    "Machine learning",
+    "Optimisation"
+   ]
+  },
+  {
+   "name": "LLMs & prompt engineering",
+   "family": "ai",
+   "aliases": "llm, chatgpt, prompting, rag, prompt engineering",
+   "related": [
+    "Natural language processing",
+    "Generative AI"
+   ]
+  },
+  {
+   "name": "Generative AI",
+   "family": "ai",
+   "aliases": "genai, diffusion, gan",
+   "related": [
+    "LLMs & prompt engineering",
+    "Deep learning"
+   ]
+  },
+  {
+   "name": "Model evaluation & validation",
+   "family": "ai",
+   "aliases": "cross validation, metrics, model evaluation, benchmarking",
+   "related": [
+    "Machine learning",
+    "Software testing"
+   ]
+  },
+  {
+   "name": "MLOps",
+   "family": "ai",
+   "aliases": "model deployment, mlflow, model serving, mlops",
+   "related": [
+    "DevOps practices",
+    "Model evaluation & validation"
+   ]
+  },
+  {
+   "name": "Explainable AI",
+   "family": "ai",
+   "aliases": "shap, lime, interpretability, xai",
+   "related": [
+    "Machine learning",
+    "Ethics in computing"
+   ]
+  },
+  {
+   "name": "Recommender systems",
+   "family": "ai",
+   "aliases": "recommendation, collaborative filtering",
+   "related": [
+    "Machine learning"
+   ]
+  },
+  {
+   "name": "Computer networks",
+   "family": "sys",
+   "aliases": "networking, tcp/ip, ccna, routing",
+   "related": [
+    "Network security",
+    "Distributed systems"
+   ]
+  },
+  {
+   "name": "Operating systems",
+   "family": "sys",
+   "aliases": "processes, threads, os",
+   "related": [
+    "Linux administration",
+    "Computer architecture"
+   ]
+  },
+  {
+   "name": "Linux administration",
+   "family": "sys",
+   "aliases": "linux, bash, shell, sysadmin",
+   "related": [
+    "Operating systems",
+    "Cloud computing"
+   ]
+  },
+  {
+   "name": "Cloud computing",
+   "family": "sys",
+   "aliases": "aws, azure, gcp, cloud",
+   "related": [
+    "Containers (Docker, Kubernetes)",
+    "Linux administration"
+   ]
+  },
+  {
+   "name": "Containers (Docker, Kubernetes)",
+   "family": "sys",
+   "aliases": "docker, kubernetes, k8s",
+   "related": [
+    "Cloud computing",
+    "DevOps practices"
+   ]
+  },
+  {
+   "name": "Distributed systems",
+   "family": "sys",
+   "aliases": "distributed computing, consensus",
+   "related": [
+    "Parallel & GPU computing",
+    "Computer networks"
+   ]
+  },
+  {
+   "name": "Computer architecture",
+   "family": "sys",
+   "aliases": "computer organization, assembly, microprocessors",
+   "related": [
+    "Embedded systems & IoT",
+    "Operating systems"
+   ]
+  },
+  {
+   "name": "Embedded systems & IoT",
+   "family": "sys",
+   "aliases": "iot, arduino, microcontrollers, embedded",
+   "related": [
+    "Computer architecture",
+    "C/C++ programming"
+   ]
+  },
+  {
+   "name": "Parallel & GPU computing",
+   "family": "sys",
+   "aliases": "cuda, gpu, parallel programming, hpc",
+   "related": [
+    "Distributed systems",
+    "Deep learning"
+   ]
+  },
+  {
+   "name": "Cybersecurity fundamentals",
+   "family": "sec",
+   "aliases": "security, information security, cybersecurity",
+   "related": [
+    "Network security",
+    "Secure software development"
+   ]
+  },
+  {
+   "name": "Cryptography",
+   "family": "sec",
+   "aliases": "encryption, cryptography",
+   "related": [
+    "Cybersecurity fundamentals"
+   ]
+  },
+  {
+   "name": "Network security",
+   "family": "sec",
+   "aliases": "firewalls, ids, network security",
+   "related": [
+    "Computer networks",
+    "Cybersecurity fundamentals"
+   ]
+  },
+  {
+   "name": "Penetration testing",
+   "family": "sec",
+   "aliases": "ethical hacking, pentest, red teaming",
+   "related": [
+    "Cybersecurity fundamentals",
+    "Software testing"
+   ]
+  },
+  {
+   "name": "Digital forensics",
+   "family": "sec",
+   "aliases": "forensics, incident response",
+   "related": [
+    "Cybersecurity fundamentals"
+   ]
+  },
+  {
+   "name": "Secure software development",
+   "family": "sec",
+   "aliases": "owasp, secure coding, devsecops",
+   "related": [
+    "Cybersecurity fundamentals",
+    "Software testing"
+   ]
+  },
+  {
+   "name": "Privacy & data protection",
+   "family": "sec",
+   "aliases": "gdpr, privacy, data protection",
+   "related": [
+    "AI governance & policy",
+    "Ethics in computing"
+   ]
+  },
+  {
+   "name": "Green & sustainable computing",
+   "family": "green",
+   "aliases": "green it, energy efficient computing, carbon footprint, green software",
+   "related": [
+    "Cloud computing",
+    "Parallel & GPU computing"
+   ]
+  },
+  {
+   "name": "Sustainability assessment",
+   "family": "green",
+   "aliases": "life cycle assessment, lca, esg, sdg, sustainable development goals",
+   "related": [
+    "Green & sustainable computing",
+    "Research methods"
+   ]
+  },
+  {
+   "name": "HCI & UX design",
+   "family": "ppl",
+   "aliases": "ux, ui, usability, hci, interaction design",
+   "related": [
+    "User research",
+    "Frontend web development"
+   ]
+  },
+  {
+   "name": "User research",
+   "family": "ppl",
+   "aliases": "interviews, surveys, user studies",
+   "related": [
+    "HCI & UX design",
+    "Research methods"
+   ]
+  },
+  {
+   "name": "Participatory design",
+   "family": "ppl",
+   "aliases": "co-design, participatory design, design thinking, service design",
+   "related": [
+    "User research",
+    "HCI & UX design"
+   ]
+  },
+  {
+   "name": "Accessibility",
+   "family": "ppl",
+   "aliases": "a11y, wcag, accessibility",
+   "related": [
+    "HCI & UX design"
+   ]
+  },
+  {
+   "name": "Technical writing & communication",
+   "family": "ppl",
+   "aliases": "documentation, writing, communication",
+   "related": [
+    "Teaching & curriculum design"
+   ]
+  },
+  {
+   "name": "Research methods",
+   "family": "ppl",
+   "aliases": "research, methodology, literature review",
+   "related": [
+    "Statistical inference",
+    "User research"
+   ]
+  },
+  {
+   "name": "Ethics in computing",
+   "family": "ppl",
+   "aliases": "ethics, professional ethics, computer ethics",
+   "related": [
+    "AI governance & policy",
+    "Explainable AI"
+   ]
+  },
+  {
+   "name": "AI governance & policy",
+   "family": "ppl",
+   "aliases": "ai policy, regulation, ai act, governance",
+   "related": [
+    "Ethics in computing",
+    "Privacy & data protection"
+   ]
+  },
+  {
+   "name": "AI literacy & critical thinking",
+   "family": "ppl",
+   "aliases": "ai literacy, critical thinking, media literacy",
+   "related": [
+    "Teaching & curriculum design",
+    "LLMs & prompt engineering"
+   ]
+  },
+  {
+   "name": "Change management",
+   "family": "ppl",
+   "aliases": "organisational change, change management, stakeholder engagement",
+   "related": [
+    "Team leadership",
+    "Software project management"
+   ]
+  },
+  {
+   "name": "Team leadership",
+   "family": "ppl",
+   "aliases": "leadership, mentoring, management",
+   "related": [
+    "Software project management"
+   ]
+  },
+  {
+   "name": "Teaching & curriculum design",
+   "family": "ppl",
+   "aliases": "pedagogy, curriculum, instructional design, teaching",
+   "related": [
+    "Technical writing & communication"
+   ]
+  },
+  {
+   "name": "Business analysis",
+   "family": "ppl",
+   "aliases": "business analysis, process modelling, bpmn",
+   "related": [
+    "Requirements engineering",
+    "Information systems"
+   ]
+  },
+  {
+   "name": "Information systems",
+   "family": "ppl",
+   "aliases": "mis, erp, information systems",
+   "related": [
+    "Business analysis",
+    "Relational databases"
+   ]
+  },
+  {
+   "name": "Product management",
+   "family": "ppl",
+   "aliases": "product, entrepreneurship, startup",
+   "related": [
+    "Software project management",
+    "Business analysis"
+   ]
+  }
+ ],
+ "courses": [
+  {
+   "title": "Introduction to Programming with Python",
+   "area": "0613",
+   "emerging": false,
+   "impact": 4,
+   "impact_note": "Programming and technological literacy separate growing jobs from declining ones.",
+   "source": "WEF Future of Jobs Report 2025",
+   "description": "First programming course: variables, control flow, functions, files and basic data handling in Python.",
+   "core": [
+    "Python programming"
+   ],
+   "supporting": [
+    "Data structures & algorithms",
+    "Version control (Git)"
+   ]
+  },
+  {
+   "title": "Data Structures & Algorithms",
+   "area": "0613",
+   "emerging": false,
+   "impact": 3,
+   "impact_note": "Foundational for every computing career; stable demand.",
+   "source": "Starter rating for this prototype; review locally",
+   "description": "Core data structures, algorithm design and complexity analysis.",
+   "core": [
+    "Data structures & algorithms",
+    "C/C++ programming"
+   ],
+   "supporting": [
+    "Discrete mathematics"
+   ]
+  },
+  {
+   "title": "Object-Oriented Design",
+   "area": "0613",
+   "emerging": false,
+   "impact": 3,
+   "impact_note": "Foundational software design; stable demand.",
+   "source": "Starter rating for this prototype; review locally",
+   "description": "Classes, interfaces, design patterns and UML for maintainable software.",
+   "core": [
+    "Object-oriented design",
+    "Java programming"
+   ],
+   "supporting": [
+    "Software architecture",
+    "Software testing"
+   ]
+  },
+  {
+   "title": "Database Systems",
+   "area": "0612",
+   "emerging": false,
+   "impact": 4,
+   "impact_note": "Data storage is the base layer for AI and big data work.",
+   "source": "WEF Future of Jobs Report 2025",
+   "description": "Relational model, SQL, schema design, transactions and an introduction to NoSQL.",
+   "core": [
+    "Relational databases",
+    "SQL",
+    "Database design & normalisation"
+   ],
+   "supporting": [
+    "NoSQL databases"
+   ]
+  },
+  {
+   "title": "Software Testing & Quality Assurance",
+   "area": "0613",
+   "emerging": false,
+   "impact": 3,
+   "impact_note": "Quality control is one of the skills that most separates growing jobs from declining ones.",
+   "source": "WEF Future of Jobs Report 2025",
+   "description": "Test design, unit and integration testing, automation and quality processes.",
+   "core": [
+    "Software testing",
+    "Test automation"
+   ],
+   "supporting": [
+    "Java programming",
+    "CI/CD pipelines"
+   ]
+  },
+  {
+   "title": "Requirements Engineering",
+   "area": "0613",
+   "emerging": false,
+   "impact": 3,
+   "impact_note": "Stable demand; increasingly paired with user research.",
+   "source": "Starter rating for this prototype; review locally",
+   "description": "Eliciting, documenting and validating requirements with stakeholders.",
+   "core": [
+    "Requirements engineering"
+   ],
+   "supporting": [
+    "User research",
+    "Business analysis",
+    "Technical writing & communication"
+   ]
+  },
+  {
+   "title": "Software Project Management",
+   "area": "0613",
+   "emerging": false,
+   "impact": 3,
+   "impact_note": "Stable demand; leadership and social influence are rising skills.",
+   "source": "WEF Future of Jobs Report 2025",
+   "description": "Planning, estimation, agile delivery, risk and team coordination.",
+   "core": [
+    "Software project management",
+    "Agile / Scrum"
+   ],
+   "supporting": [
+    "Team leadership",
+    "Technical writing & communication"
+   ]
+  },
+  {
+   "title": "Web Application Development",
+   "area": "0613",
+   "emerging": false,
+   "impact": 4,
+   "impact_note": "Software and application developers are among the fastest-growing jobs.",
+   "source": "WEF Future of Jobs Report 2025",
+   "description": "Full-stack web development: frontend, backend APIs and databases.",
+   "core": [
+    "Frontend web development",
+    "Backend & API development",
+    "JavaScript / TypeScript"
+   ],
+   "supporting": [
+    "SQL",
+    "Version control (Git)"
+   ]
+  },
+  {
+   "title": "Mobile Application Development",
+   "area": "0613",
+   "emerging": false,
+   "impact": 3,
+   "impact_note": "Software and application developers are among the fastest-growing jobs.",
+   "source": "WEF Future of Jobs Report 2025",
+   "description": "Building and publishing apps for Android and iOS.",
+   "core": [
+    "Mobile app development"
+   ],
+   "supporting": [
+    "Java programming",
+    "Backend & API development"
+   ]
+  },
+  {
+   "title": "Computer Networks",
+   "area": "0612",
+   "emerging": false,
+   "impact": 4,
+   "impact_note": "Networks and cybersecurity is the second fastest-growing skill area to 2030.",
+   "source": "WEF Future of Jobs Report 2025",
+   "description": "Network layers, protocols, routing and switching, and network performance.",
+   "core": [
+    "Computer networks"
+   ],
+   "supporting": [
+    "Linux administration",
+    "Operating systems"
+   ]
+  },
+  {
+   "title": "Operating Systems",
+   "area": "0613",
+   "emerging": false,
+   "impact": 3,
+   "impact_note": "Foundational systems knowledge; stable demand.",
+   "source": "Starter rating for this prototype; review locally",
+   "description": "Processes, threads, memory, file systems and concurrency.",
+   "core": [
+    "Operating systems"
+   ],
+   "supporting": [
+    "C/C++ programming",
+    "Computer architecture",
+    "Linux administration"
+   ]
+  },
+  {
+   "title": "Probability & Statistics",
+   "area": "0542",
+   "emerging": false,
+   "impact": 4,
+   "impact_note": "Statistical reasoning underpins data science and AI work.",
+   "source": "WEF Future of Jobs Report 2025",
+   "description": "Probability, distributions, estimation and hypothesis testing.",
+   "core": [
+    "Probability",
+    "Statistical inference"
+   ],
+   "supporting": [
+    "R programming"
+   ]
+  },
+  {
+   "title": "Numerical Methods",
+   "area": "0541",
+   "emerging": false,
+   "impact": 3,
+   "impact_note": "Foundational for scientific computing and machine learning.",
+   "source": "Starter rating for this prototype; review locally",
+   "description": "Root finding, interpolation, numerical linear algebra and differential equations.",
+   "core": [
+    "Numerical methods",
+    "Calculus",
+    "Linear algebra"
+   ],
+   "supporting": [
+    "Python programming"
+   ]
+  },
+  {
+   "title": "Information Security",
+   "area": "0612",
+   "emerging": false,
+   "impact": 5,
+   "impact_note": "Networks and cybersecurity is the second fastest-growing skill area to 2030.",
+   "source": "WEF Future of Jobs Report 2025",
+   "description": "Security principles, cryptography, threats and defences.",
+   "core": [
+    "Cybersecurity fundamentals",
+    "Cryptography"
+   ],
+   "supporting": [
+    "Network security",
+    "Secure software development"
+   ]
+  },
+  {
+   "title": "Research Methods in Computing",
+   "area": "0688",
+   "emerging": false,
+   "impact": 3,
+   "impact_note": "Supports theses and evidence-based practice.",
+   "source": "Starter rating for this prototype; review locally",
+   "description": "Designing studies, collecting and analysing data, and writing up research.",
+   "core": [
+    "Research methods",
+    "Statistical inference"
+   ],
+   "supporting": [
+    "Technical writing & communication",
+    "Experimental design & A/B testing"
+   ]
+  },
+  {
+   "title": "Distributed & Parallel Computing",
+   "area": "0613",
+   "emerging": false,
+   "impact": 4,
+   "impact_note": "Training and serving AI models depends on distributed and GPU computing.",
+   "source": "Starter rating for this prototype; review locally",
+   "description": "Distributed algorithms, parallel programming and GPU computing.",
+   "core": [
+    "Distributed systems",
+    "Parallel & GPU computing"
+   ],
+   "supporting": [
+    "Operating systems",
+    "Computer networks"
+   ]
+  },
+  {
+   "title": "Machine Learning",
+   "area": "0613",
+   "emerging": true,
+   "impact": 5,
+   "impact_note": "AI and big data is the fastest-growing skill area to 2030.",
+   "source": "WEF Future of Jobs Report 2025",
+   "description": "Supervised and unsupervised learning, model selection and evaluation.",
+   "core": [
+    "Machine learning",
+    "Python programming"
+   ],
+   "supporting": [
+    "Linear algebra",
+    "Probability",
+    "Model evaluation & validation"
+   ]
+  },
+  {
+   "title": "Deep Learning",
+   "area": "0613",
+   "emerging": true,
+   "impact": 4,
+   "impact_note": "AI and big data is the fastest-growing skill area to 2030.",
+   "source": "WEF Future of Jobs Report 2025",
+   "description": "Neural networks, training, CNNs, sequence models and transformers.",
+   "core": [
+    "Deep learning",
+    "Python programming"
+   ],
+   "supporting": [
+    "Linear algebra",
+    "Calculus",
+    "Parallel & GPU computing"
+   ]
+  },
+  {
+   "title": "NLP & Large Language Models",
+   "area": "0613",
+   "emerging": true,
+   "impact": 5,
+   "impact_note": "AI and big data is the fastest-growing skill area to 2030.",
+   "source": "WEF Future of Jobs Report 2025",
+   "description": "Text processing, transformers, LLMs, retrieval-augmented generation and their limits.",
+   "core": [
+    "Natural language processing",
+    "LLMs & prompt engineering",
+    "Deep learning"
+   ],
+   "supporting": [
+    "Python programming"
+   ]
+  },
+  {
+   "title": "Computer Vision",
+   "area": "0613",
+   "emerging": true,
+   "impact": 4,
+   "impact_note": "AI and big data is the fastest-growing skill area to 2030.",
+   "source": "WEF Future of Jobs Report 2025",
+   "description": "Image processing, CNNs, detection and segmentation.",
+   "core": [
+    "Computer vision",
+    "Deep learning"
+   ],
+   "supporting": [
+    "Linear algebra",
+    "Python programming"
+   ]
+  },
+  {
+   "title": "MLOps & ML Engineering",
+   "area": "0613",
+   "emerging": true,
+   "impact": 5,
+   "impact_note": "AI and big data is the fastest-growing skill area to 2030.",
+   "source": "WEF Future of Jobs Report 2025",
+   "description": "Deploying, monitoring and maintaining machine learning systems in production.",
+   "core": [
+    "MLOps",
+    "CI/CD pipelines",
+    "Containers (Docker, Kubernetes)"
+   ],
+   "supporting": [
+    "Cloud computing",
+    "Python programming",
+    "Model evaluation & validation",
+    "DevOps practices"
+   ]
+  },
+  {
+   "title": "Testing & Red-Teaming AI Systems",
+   "area": "0613",
+   "emerging": true,
+   "impact": 5,
+   "impact_note": "AI and big data is the fastest-growing skill area to 2030. Quality control is one of the skills that most separates growing jobs from declining ones.",
+   "source": "WEF Future of Jobs Report 2025",
+   "description": "Evaluating AI behaviour, robustness, bias and failure modes; adversarial testing of LLM applications.",
+   "core": [
+    "Model evaluation & validation",
+    "Software testing"
+   ],
+   "supporting": [
+    "LLMs & prompt engineering",
+    "Test automation",
+    "Penetration testing",
+    "Ethics in computing"
+   ]
+  },
+  {
+   "title": "Data Engineering & Pipelines",
+   "area": "0612",
+   "emerging": true,
+   "impact": 5,
+   "impact_note": "AI and big data is the fastest-growing skill area to 2030.",
+   "source": "WEF Future of Jobs Report 2025",
+   "description": "Ingesting, transforming and serving data at scale with pipelines and warehouses.",
+   "core": [
+    "Data warehousing & ETL",
+    "Data pipelines & orchestration",
+    "SQL"
+   ],
+   "supporting": [
+    "Big data (Spark, Hadoop)",
+    "Cloud computing",
+    "Python programming"
+   ]
+  },
+  {
+   "title": "Cloud Infrastructure & DevOps",
+   "area": "0612",
+   "emerging": true,
+   "impact": 4,
+   "impact_note": "Networks and cybersecurity is the second fastest-growing skill area to 2030.",
+   "source": "WEF Future of Jobs Report 2025",
+   "description": "Cloud services, containers, infrastructure as code and deployment automation.",
+   "core": [
+    "Cloud computing",
+    "Containers (Docker, Kubernetes)",
+    "Linux administration"
+   ],
+   "supporting": [
+    "Computer networks",
+    "DevOps practices",
+    "CI/CD pipelines"
+   ]
+  },
+  {
+   "title": "Responsible AI & Ethics",
+   "area": "0688",
+   "emerging": true,
+   "impact": 4,
+   "impact_note": "AI adoption is raising demand for fairness, transparency and accountability skills.",
+   "source": "Starter rating for this prototype; review locally",
+   "description": "Fairness, transparency, accountability and the social impact of AI systems.",
+   "core": [
+    "Ethics in computing",
+    "Explainable AI"
+   ],
+   "supporting": [
+    "AI governance & policy",
+    "Privacy & data protection",
+    "Research methods"
+   ]
+  },
+  {
+   "title": "AI Policy & Governance",
+   "area": "0688",
+   "emerging": true,
+   "impact": 4,
+   "impact_note": "AI regulation (for example the EU AI Act) is creating demand for governance skills.",
+   "source": "Starter rating for this prototype; review locally",
+   "description": "Regulation, standards, risk management and institutional AI policy.",
+   "core": [
+    "AI governance & policy",
+    "Privacy & data protection"
+   ],
+   "supporting": [
+    "Ethics in computing",
+    "Technical writing & communication",
+    "Research methods"
+   ]
+  },
+  {
+   "title": "Human–AI Interaction",
+   "area": "0688",
+   "emerging": true,
+   "impact": 3,
+   "impact_note": "Technological literacy is the third fastest-growing skill area to 2030.",
+   "source": "WEF Future of Jobs Report 2025",
+   "description": "Designing and evaluating how people work with AI systems.",
+   "core": [
+    "HCI & UX design",
+    "User research"
+   ],
+   "supporting": [
+    "LLMs & prompt engineering",
+    "Accessibility"
+   ]
+  },
+  {
+   "title": "Building Generative AI Applications",
+   "area": "0613",
+   "emerging": true,
+   "impact": 5,
+   "impact_note": "AI and big data is the fastest-growing skill area to 2030.",
+   "source": "WEF Future of Jobs Report 2025",
+   "description": "Building applications on top of LLMs: prompting, retrieval, tools and evaluation.",
+   "core": [
+    "LLMs & prompt engineering",
+    "Backend & API development"
+   ],
+   "supporting": [
+    "Python programming",
+    "Frontend web development",
+    "Generative AI"
+   ]
+  },
+  {
+   "title": "Data Visualisation & Storytelling",
+   "area": "0613",
+   "emerging": true,
+   "impact": 4,
+   "impact_note": "AI and big data is the fastest-growing skill area to 2030.",
+   "source": "WEF Future of Jobs Report 2025",
+   "description": "Turning data into clear charts, dashboards and narratives.",
+   "core": [
+    "Data visualisation",
+    "Data cleaning & wrangling"
+   ],
+   "supporting": [
+    "Statistical inference",
+    "Technical writing & communication"
+   ]
+  },
+  {
+   "title": "Experimental Design & A/B Testing",
+   "area": "0542",
+   "emerging": true,
+   "impact": 3,
+   "impact_note": "Evidence-based decisions in products and policy depend on sound experiments.",
+   "source": "Starter rating for this prototype; review locally",
+   "description": "Designing experiments, power analysis, A/B tests and causal reasoning.",
+   "core": [
+    "Experimental design & A/B testing",
+    "Statistical inference"
+   ],
+   "supporting": [
+    "Regression modelling",
+    "Python programming"
+   ]
+  },
+  {
+   "title": "Time Series & Forecasting",
+   "area": "0542",
+   "emerging": true,
+   "impact": 4,
+   "impact_note": "AI and big data is the fastest-growing skill area to 2030.",
+   "source": "WEF Future of Jobs Report 2025",
+   "description": "Forecasting methods from ARIMA to machine learning models.",
+   "core": [
+    "Time series analysis",
+    "Regression modelling"
+   ],
+   "supporting": [
+    "Python programming",
+    "Machine learning"
+   ]
+  },
+  {
+   "title": "AI Security & Adversarial ML",
+   "area": "0612",
+   "emerging": true,
+   "impact": 5,
+   "impact_note": "AI and big data is the fastest-growing skill area to 2030. Networks and cybersecurity is the second fastest-growing skill area to 2030.",
+   "source": "WEF Future of Jobs Report 2025",
+   "description": "Attacks on and defences for machine learning systems.",
+   "core": [
+    "Cybersecurity fundamentals",
+    "Machine learning"
+   ],
+   "supporting": [
+    "Penetration testing",
+    "Secure software development",
+    "Model evaluation & validation"
+   ]
+  },
+  {
+   "title": "Edge AI & IoT",
+   "area": "0688",
+   "emerging": true,
+   "impact": 4,
+   "impact_note": "AI and big data is the fastest-growing skill area to 2030.",
+   "source": "WEF Future of Jobs Report 2025",
+   "description": "Running AI models on embedded and IoT devices.",
+   "core": [
+    "Embedded systems & IoT",
+    "Deep learning"
+   ],
+   "supporting": [
+    "C/C++ programming",
+    "Computer architecture",
+    "Parallel & GPU computing"
+   ]
+  },
+  {
+   "title": "Optimisation for Machine Learning",
+   "area": "0541",
+   "emerging": true,
+   "impact": 3,
+   "impact_note": "The mathematical core of model training.",
+   "source": "Starter rating for this prototype; review locally",
+   "description": "Convex optimisation, gradient methods and their use in training models.",
+   "core": [
+    "Optimisation",
+    "Linear algebra",
+    "Calculus"
+   ],
+   "supporting": [
+    "Machine learning",
+    "Numerical methods"
+   ]
+  },
+  {
+   "title": "AI Literacy & Critical Thinking",
+   "area": "0611",
+   "emerging": true,
+   "impact": 4,
+   "impact_note": "Technological literacy is the third fastest-growing skill area to 2030.",
+   "source": "WEF Future of Jobs Report 2025",
+   "description": "Using AI tools critically: verifying outputs, spotting errors and keeping your own reasoning in charge.",
+   "core": [
+    "AI literacy & critical thinking",
+    "Teaching & curriculum design"
+   ],
+   "supporting": [
+    "LLMs & prompt engineering",
+    "Ethics in computing",
+    "Research methods"
+   ]
+  },
+  {
+   "title": "Bayesian Data Analysis",
+   "area": "0542",
+   "emerging": true,
+   "impact": 3,
+   "impact_note": "Growing use in data science and uncertainty-aware AI.",
+   "source": "Starter rating for this prototype; review locally",
+   "description": "Bayesian inference, priors, MCMC and probabilistic programming.",
+   "core": [
+    "Bayesian statistics",
+    "Probability"
+   ],
+   "supporting": [
+    "Python programming",
+    "R programming"
+   ]
+  },
+  {
+   "title": "Green & Sustainable Computing",
+   "area": "0688",
+   "emerging": true,
+   "impact": 4,
+   "impact_note": "Environmental stewardship entered the top 10 fastest-growing skills for the first time.",
+   "source": "WEF Future of Jobs Report 2025",
+   "description": "Measuring and reducing the energy and carbon footprint of software, data centres and AI.",
+   "core": [
+    "Green & sustainable computing",
+    "Sustainability assessment"
+   ],
+   "supporting": [
+    "Cloud computing",
+    "Parallel & GPU computing",
+    "Research methods"
+   ]
+  },
+  {
+   "title": "Participatory Design of Digital Services",
+   "area": "0688",
+   "emerging": true,
+   "impact": 3,
+   "impact_note": "Co-designing technology with the people affected by it.",
+   "source": "Starter rating for this prototype; review locally",
+   "description": "Co-design methods, workshops with users and stakeholders, and service design.",
+   "core": [
+    "Participatory design",
+    "User research"
+   ],
+   "supporting": [
+    "HCI & UX design",
+    "Accessibility",
+    "Change management"
+   ]
+  }
+ ]
+}
