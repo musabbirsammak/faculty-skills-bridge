@@ -7,3 +7,4 @@ staticfiles/
 venv/
 *.csv
 !catalog/data/*.csv
+.DS_Store
