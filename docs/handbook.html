@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Faculty Skills Bridge Handbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: sticky contents rail on the left, one reading column on the right; tables and callouts for numbers */
+  --paper: #f3f5f2; --surface: #ffffff; --ink: #17201c; --muted: #5a6560; --line: #dce1dc;
+  --accent: #0f6a4b; --accent-soft: #e1efe8; --ai: #3a4ba6; --ai-soft: #e6e9f7;
+  --warn: #9a610d; --warn-soft: #f7ecd8; --danger: #a33a2c; --danger-soft: #f6e3df; --slate: #56626f; --slate-soft: #eaeef1;
+  --font-display: "Source Serif 4", Georgia, serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #121715; --surface: #1a211e; --ink: #e7ece9; --muted: #9ba8a2; --line: #2d3833;
+    --accent: #5cc79b; --accent-soft: #1d3a2e; --ai: #9eabf2; --ai-soft: #262d4f;
+    --warn: #e2ad5a; --warn-soft: #3a2d17; --danger: #ef8c7c; --danger-soft: #3d221e; --slate: #a9b4c0; --slate-soft: #272e35;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #121715; --surface: #1a211e; --ink: #e7ece9; --muted: #9ba8a2; --line: #2d3833;
+  --accent: #5cc79b; --accent-soft: #1d3a2e; --ai: #9eabf2; --ai-soft: #262d4f;
+  --warn: #e2ad5a; --warn-soft: #3a2d17; --danger: #ef8c7c; --danger-soft: #3d221e; --slate: #a9b4c0; --slate-soft: #272e35;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { background: var(--paper); color: var(--ink); font: 16px/1.65 var(--font-body); }
+a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--ai); outline-offset: 2px; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 600; line-height: 1.2; text-wrap: balance; margin: 0; }
+h2 { font-size: 28px; padding-top: 8px; }
+h3 { font-size: 19px; margin-top: 26px; }
+p, ul, ol, table, .callout, .figure { margin: 12px 0 0; }
+ul, ol { padding-left: 22px; }
+li + li { margin-top: 4px; }
+code, .num { font-family: var(--font-mono); font-size: .9em; font-variant-numeric: tabular-nums; }
+code { background: var(--slate-soft); padding: 1px 5px; border-radius: 4px; }
+.layout { display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: 40px; max-width: 1180px; margin: 0 auto; padding: 0 20px; }
+@media (max-width: 900px) { .layout { grid-template-columns: 1fr; gap: 0; } }
+.toc { position: sticky; top: 0; align-self: start; max-height: 100vh; overflow: auto; padding: 28px 0 28px; }
+@media (max-width: 900px) { .toc { position: static; max-height: none; padding-bottom: 0; } }
+.toc .brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 600; font-size: 18px; }
+.brand-mark { width: 22px; height: 22px; border-radius: 6px; background: linear-gradient(135deg, var(--accent) 50%, var(--ai) 50%); flex: none; }
+.toc p.sub { margin: 4px 0 18px; color: var(--muted); font-size: 13px; }
+.toc ol { list-style: none; padding: 0; margin: 0; counter-reset: sec; }
+.toc li { margin: 0; counter-increment: sec; }
+.toc a { display: flex; gap: 10px; padding: 5px 8px; border-radius: 6px; color: var(--ink); text-decoration: none; font-size: 14px; }
+.toc a::before { content: counter(sec, decimal-leading-zero); font-family: var(--font-mono); font-size: 12px; color: var(--muted); padding-top: 2px; }
+.toc a:hover { background: var(--surface); }
+main { padding: 28px 0 80px; min-width: 0; }
+.cover { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 28px 30px; }
+.cover h1 { font-size: 40px; }
+.cover p.lead { font-size: 18px; color: var(--muted); max-width: 62ch; }
+.meta-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.pill { display: inline-block; font-size: 12px; padding: 2px 9px; border-radius: 999px; background: var(--slate-soft); color: var(--muted); font-weight: 500; white-space: nowrap; }
+.pill.ok { background: var(--accent-soft); color: var(--accent); } .pill.ai { background: var(--ai-soft); color: var(--ai); }
+.pill.warn { background: var(--warn-soft); color: var(--warn); } .pill.danger { background: var(--danger-soft); color: var(--danger); }
+section.chapter { margin-top: 48px; scroll-margin-top: 16px; }
+section.chapter > *:not(h2):not(.wide) { max-width: 72ch; }
+.eyebrow { font-size: 12px; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin: 0 0 6px; }
+.table-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; margin-top: 14px; }
+table { border-collapse: collapse; width: 100%; font-size: 14.5px; margin: 0; }
+th, td { text-align: left; padding: 9px 13px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { background: var(--paper); font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); font-weight: 600; }
+tr:last-child td { border-bottom: 0; }
+td.num, th.num { text-align: right; }
+.callout { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--ai); border-radius: 8px; padding: 12px 16px; }
+.callout.good { border-left-color: var(--accent); } .callout.warn { border-left-color: var(--warn); }
+.callout b:first-child { display: block; margin-bottom: 2px; }
+.formula { font-family: var(--font-mono); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; margin-top: 12px; font-size: 14px; overflow-x: auto; }
+.figure { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px; }
+.figure .cap { font-size: 13px; color: var(--muted); margin-top: 10px; }
+.scale { position: relative; height: 34px; border-radius: 8px; overflow: hidden; display: flex; font-size: 12px; font-weight: 600; }
+.scale span { display: flex; align-items: center; justify-content: center; color: var(--ink); }
+.scale .s0 { flex: 25; background: var(--slate-soft); color: var(--muted); }
+.scale .s1 { flex: 20; background: color-mix(in srgb, var(--slate) 22%, var(--surface)); }
+.scale .s2 { flex: 25; background: var(--warn-soft); color: var(--warn); }
+.scale .s3 { flex: 30; background: var(--accent-soft); color: var(--accent); }
+.ticks { display: flex; font-family: var(--font-mono); font-size: 12px; color: var(--muted); margin-top: 4px; }
+.ticks span { flex: none; }
+.flow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.flow .arrow { color: var(--muted); font-family: var(--font-mono); }
+.steps-list { counter-reset: st; list-style: none; padding: 0; }
+.steps-list > li { counter-increment: st; position: relative; padding-left: 38px; margin-top: 12px; }
+.steps-list > li::before { content: counter(st); position: absolute; left: 0; top: 0; width: 26px; height: 26px; border-radius: 7px; background: var(--accent-soft); color: var(--accent); font: 600 13px/26px var(--font-mono); text-align: center; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin-top: 14px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+.card h4 { margin: 0 0 4px; font-size: 15px; }
+.card p { margin: 0; font-size: 14px; color: var(--muted); }
+dl.glossary { display: grid; grid-template-columns: minmax(140px, 220px) 1fr; gap: 8px 18px; margin-top: 14px; }
+dl.glossary dt { font-weight: 600; }
+dl.glossary dd { margin: 0; color: var(--ink); }
+@media (max-width: 560px) { dl.glossary { grid-template-columns: 1fr; } dl.glossary dd { margin-bottom: 8px; } .cover h1 { font-size: 32px; } }
+footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; max-width: 72ch; }
+@media print {
+  .toc { display: none; } .layout { display: block; } body { background: #fff; font-size: 11pt; }
+  section.chapter { break-inside: auto; } h2 { break-after: avoid; } .table-wrap, .callout, .figure { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<div class="layout">
+  <nav class="toc" aria-label="Contents">
+    <div class="brand"><span class="brand-mark" aria-hidden="true"></span>Faculty Skills Bridge</div>
+    <p class="sub">Handbook and user manual</p>
+    <ol>
+      <li><a href="#about">What it is and why</a></li>
+      <li><a href="#roles">Roles and privacy</a></li>
+      <li><a href="#start">Getting started</a></li>
+      <li><a href="#skills">My skills</a></li>
+      <li><a href="#paths">Course paths</a></li>
+      <li><a href="#explore">Exploring a new area</a></li>
+      <li><a href="#catalogue">The catalogue</a></li>
+      <li><a href="#status">Course status decisions</a></li>
+      <li><a href="#documents">Proposals and redesigns</a></li>
+      <li><a href="#insights">Insights</a></li>
+      <li><a href="#calc">How the numbers are calculated</a></li>
+      <li><a href="#impact">Impact ratings</a></li>
+      <li><a href="#data">Data and classification</a></li>
+      <li><a href="#practice">Best practices</a></li>
+      <li><a href="#admin">Administration</a></li>
+      <li><a href="#limits">Limits</a></li>
+      <li><a href="#next">Next steps</a></li>
+      <li><a href="#glossary">Glossary</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <header class="cover">
+      <p class="eyebrow">Handbook · version 1</p>
+      <h1>Faculty Skills Bridge</h1>
+      <p class="lead">Open-source software that helps a university and its teachers move through AI-era curriculum change together: teachers see where their skills can take them, and the university plans courses, policy and training with the people affected.</p>
+      <div class="meta-row">
+        <span class="pill ok">For teachers</span><span class="pill ai">For heads, deans and leadership</span><span class="pill">For administrators</span><span class="pill">AGPL-3.0</span>
+      </div>
+    </header>
+
+    <!-- 1 -->
+    <section class="chapter" id="about">
+      <p class="eyebrow">Chapter 1</p>
+      <h2>What it is and why</h2>
+      <p>When courses are retired or reshaped, the teachers who taught them are often left without a plan. Faculty Skills Bridge treats the university as one system: students, teachers and courses change together. It does three things.</p>
+      <div class="cards">
+        <div class="card"><h4>Skills to course paths</h4><p>Teachers add their skills and see which courses they could teach now, soon, or with a longer runway, and what to learn.</p></div>
+        <div class="card"><h4>Work together</h4><p>Policy proposals and a course redesign studio where colleagues edit, comment and decide together.</p></div>
+        <div class="card"><h4>Insights</h4><p>Totals for heads, deans and leadership: what the university can teach, where it must grow, who needs support.</p></div>
+      </div>
+      <h3>Principles</h3>
+      <ul>
+        <li><b>Private by default.</b> A teacher's skills, suggestions and feedback are visible only to that teacher.</li>
+        <li><b>Totals, not individuals.</b> Leaders see aggregates, and small numbers that could point to a person are hidden.</li>
+        <li><b>Built by its users.</b> Teachers add courses and skills, rate suggestions and co-write documents.</li>
+        <li><b>Explainable.</b> Every number can be worked out by hand from the rules in <a href="#calc">chapter 11</a>.</li>
+      </ul>
+      <p>Each university runs its own copy on its own domain. The product name stays the same; the university's name appears beneath it.</p>
+    </section>
+
+    <!-- 2 -->
+    <section class="chapter" id="roles">
+      <p class="eyebrow">Chapter 2</p>
+      <h2>Roles and privacy</h2>
+      <p>Everyone registers as a teacher. An administrator can give someone a different role. Roles change which totals a person sees and which decisions they can make. No role can open an individual's skill profile.</p>
+      <div class="table-wrap wide">
+        <table>
+          <thead><tr><th>Role</th><th>Totals they can see</th><th>Decisions they can make</th></tr></thead>
+          <tbody>
+            <tr><td><b>Teacher</b></td><td>The whole university and their own department</td><td>Suggest courses and skills; propose changes to courses; vote on suggested courses; edit documents; start proposals and redesigns</td></tr>
+            <tr><td><b>Head of department</b></td><td>The same as a teacher</td><td>For their department's courses and courses not yet assigned to a department: set the status, edit directly, and accept or reject proposed changes</td></tr>
+            <tr><td><b>Dean</b></td><td>Also their faculty and each department in it, with a breakdown by department</td><td>The same for any department of their faculty, and unassigned courses</td></tr>
+            <tr><td><b>University leadership</b></td><td>Every faculty and department, with a breakdown by faculty</td><td>The same for any course</td></tr>
+            <tr><td><b>Administrator</b> (staff)</td><td>Everything leadership sees</td><td>Institution settings, faculties and departments, roles, account approval, data in the admin panel</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>What others can see about you</h3>
+      <div class="table-wrap wide">
+        <table>
+          <thead><tr><th>Information</th><th>Colleagues</th><th>Heads, deans, leadership</th></tr></thead>
+          <tbody>
+            <tr><td>Your skills and levels</td><td>No</td><td>No; only totals</td></tr>
+            <tr><td>Your course suggestions</td><td>No</td><td>No</td></tr>
+            <tr><td>Your feedback on suggestions</td><td>No</td><td>Only totals per course, once 3 or more have answered</td></tr>
+            <tr><td>Your comments</td><td>Yes, with your name, or as "A colleague" if anonymous</td><td>Same as colleagues</td></tr>
+            <tr><td>Your edits to documents</td><td>Yes, in the history</td><td>Same as colleagues</td></tr>
+            <tr><td>Your stance on a proposal</td><td>Only totals</td><td>Only totals</td></tr>
+            <tr><td>Your vote on a suggested course</td><td>Only totals</td><td>Only totals</td></tr>
+            <tr><td>Changes you propose to a course</td><td>Yes, with your name</td><td>Yes, with your name</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout warn"><b>One honest caveat</b>People who run the server can technically read the database. Each university should decide and publish who has that access.</div>
+    </section>
+
+    <!-- 3 -->
+    <section class="chapter" id="start">
+      <p class="eyebrow">Chapter 3</p>
+      <h2>Getting started</h2>
+      <ol class="steps-list">
+        <li><b>Create an account</b> with your university email. Some universities only accept their own email domain, and some activate new accounts by hand, in which case you can log in once an administrator approves you.</li>
+        <li><b>Choose your department</b> in your profile. It decides which department totals you see.</li>
+        <li><b>Set your main field</b> (for example, Information &amp; communication technologies, or Business, administration &amp; law). Course paths outside it are then marked "Outside your field".</li>
+        <li><b>Read "What can others see?"</b>, linked in the footer and the menu.</li>
+        <li><b>Add your skills</b> (<a href="#skills">chapter 4</a>), then open <b>Course paths</b> (<a href="#paths">chapter 5</a>).</li>
+      </ol>
+      <p>Forgot your password? Use the link on the login page; a reset link is sent to your email.</p>
+      <h3>Notifications</h3>
+      <p>The bell next to your name shows how many notifications you haven't read. You are notified when something you are involved in changes: a course you suggested, edited, voted on or proposed changes to, and a proposal or redesign you started, edited, commented on or took a stance on. Notifications cover new comments and replies, edited sections, new stages, status decisions, proposed and decided course changes, and votes on your suggestions. Heads, deans and leaders are also notified of new course suggestions and proposed changes they are responsible for. Notifications never reveal who posted anonymously. You never get a notification for your own action. A university can also turn on email notifications.</p>
+    </section>
+
+    <!-- 4 -->
+    <section class="chapter" id="skills">
+      <p class="eyebrow">Chapter 4</p>
+      <h2>My skills</h2>
+      <p>Add skills by typing (search also matches other names, so "docker" finds <i>Containers (Docker, Kubernetes)</i>) or by browsing by area. For each skill, choose a level.</p>
+      <div class="table-wrap wide">
+        <table>
+          <thead><tr><th>Level</th><th>Use it when</th><th class="num">Counts as</th></tr></thead>
+          <tbody>
+            <tr><td><b>Can teach it</b></td><td>You could teach a course on it tomorrow, or have done so</td><td class="num">100%</td></tr>
+            <tr><td><b>Use it regularly</b></td><td>You use it in your work, research or projects</td><td class="num">70%</td></tr>
+            <tr><td><b>Familiar</b></td><td>You know the basics or used it a while ago</td><td class="num">35%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>Rating well</h3>
+      <ul>
+        <li>Think beyond your course titles: tools, methods, research and industry work all count.</li>
+        <li>Be honest in both directions. Underrating hides real options; overrating suggests paths that will disappoint.</li>
+        <li>Missing a skill? Use <b>Propose a new skill</b>. Give it the name people in your field use, plus other names it goes by.</li>
+        <li>Update your skills after training, a project or a new course.</li>
+      </ul>
+    </section>
+
+    <!-- 5 -->
+    <section class="chapter" id="paths">
+      <p class="eyebrow">Chapter 5</p>
+      <h2>Course paths</h2>
+      <p>Course paths compares your skills with every course in the catalogue and sorts the matches into three groups.</p>
+      <div class="figure wide">
+        <div class="scale" role="img" aria-label="Match scale: below 25% hidden, 25 to 45% stretch, 45 to 70% short preparation, 70% and above ready now">
+          <span class="s0">Hidden</span><span class="s1">Stretch</span><span class="s2">Short preparation</span><span class="s3">Ready now</span>
+        </div>
+        <div class="ticks"><span style="width:25%">0%</span><span style="width:20%">25%</span><span style="width:25%">45%</span><span style="width:30%">70%</span></div>
+        <p class="cap">"Ready now" also needs every core skill covered well (at least 60%). Courses below 25% are hidden here, but you can still see them with <a href="#explore">Explore a new area</a>.</p>
+      </div>
+      <h3>Order</h3>
+      <p>Within each group, courses with higher <b>impact</b> come first, then higher match. Use <b>Recent subjects only</b> to see AI-era and other new subjects, and the field menu to limit suggestions to one field.</p>
+      <h3>Reading a course card</h3>
+      <div class="table-wrap wide">
+        <table>
+          <thead><tr><th>Part</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td>Labels</td><td>Status at your university (Suggested, Planned, Offered here, Retiring), Recent subject, area, Outside your field, impact bars (1–5)</td></tr>
+            <tr><td>Match %</td><td>How much of the course's needs you already cover (<a href="#calc">chapter 11</a>)</td></tr>
+            <tr><td>You bring</td><td>Skills you know well. <b>Bold</b> means core to the course</td></tr>
+            <tr><td>Head start</td><td>Skills you know a little ("familiar") or can reach through a related skill ("via …")</td></tr>
+            <tr><td>To learn</td><td>Skills you don't have yet</td></tr>
+            <tr><td>Suggested path</td><td>Steps and a rough time: ready now, a few weeks, about one semester, or two semesters or more</td></tr>
+            <tr><td>Why it matters</td><td>The reason behind the impact rating</td></tr>
+            <tr><td>Does this fit you?</td><td>Makes sense / Doesn't fit / Interested. Private to you; only totals reach the department</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>Skills that open the most doors</h3>
+      <p>The side panel lists up to five missing skills that would bring the most high-impact courses within reach. It is your personal training list.</p>
+      <div class="callout good"><b>Why your feedback matters</b>"Doesn't fit" on many cards usually means the catalogue links a course to the wrong skills. Those totals show heads where to fix it.</div>
+    </section>
+
+    <!-- 6 -->
+    <section class="chapter" id="explore">
+      <p class="eyebrow">Chapter 6</p>
+      <h2>Exploring a new area</h2>
+      <p>Some teachers want to move into a completely different field. On Course paths, choose a field under <b>Explore a new area</b>. You see every course in that field, closest to your skills first, with no cut-off. Courses far from your skills get a longer path: an introductory course first, sitting in for a semester, and more than a year before teaching alone.</p>
+      <p>The side panel becomes <b>Where to start</b>: the missing skills that would bring the most high-impact courses in that field within reach.</p>
+    </section>
+
+    <!-- 7 -->
+    <section class="chapter" id="catalogue">
+      <p class="eyebrow">Chapter 7</p>
+      <h2>The catalogue</h2>
+      <p>The catalogue lists every course and the skills it needs. Filter by search, field, area, status and recent subjects. Each card shows your match.</p>
+      <h3>What a course records</h3>
+      <div class="table-wrap wide">
+        <table>
+          <thead><tr><th>Item</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td>Area</td><td>The UNESCO ISCED-F 2013 detailed field that best describes the content (e.g. 0613 Software and applications development and analysis)</td></tr>
+            <tr><td>Field</td><td>The broad ISCED-F field, set automatically from the area</td></tr>
+            <tr><td>Recent subject</td><td>A subject departments are adding in the AI era or for sustainability</td></tr>
+            <tr><td>Impact (1–5)</td><td>Expected value of the subject over the next five years, with a reason and a source</td></tr>
+            <tr><td>Skills</td><td><b>Core</b> skills are essential and count three times as much; <b>supporting</b> skills help</td></tr>
+            <tr><td>Status and department</td><td>Whether the university offers, plans or is retiring it, and which department is responsible (<a href="#status">chapter 8</a>)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>Adding or editing a course</h3>
+      <ol>
+        <li>Open <b>Catalogue → Add a course</b>, or <b>Edit course</b> on a course page.</li>
+        <li>Choose the ISCED-F area that matches the <i>content</i>, not the department that teaches it.</li>
+        <li>Add the skills a teacher needs; tick <b>Core</b> for the essential ones (at least one).</li>
+        <li>Rate impact and explain why in one sentence; name the source.</li>
+      </ol>
+      <p>A new course starts as <b>Suggested</b>.</p>
+      <h3>Changes are reviewed</h3>
+      <ul>
+        <li>Heads, deans and leaders responsible for a course edit it directly.</li>
+        <li>Everyone else clicks <b>Propose changes</b>. The proposal records only what changes, with an optional reason, and goes to the responsible heads, deans and leaders.</li>
+        <li>They see a before-and-after comparison under <b>Course reviews</b> and accept or decline it, with an optional note. The proposer and others involved are notified.</li>
+        <li>A course with changes waiting shows a notice at the top of its page.</li>
+      </ul>
+    </section>
+
+    <!-- 8 -->
+    <section class="chapter" id="status">
+      <p class="eyebrow">Chapter 8</p>
+      <h2>Course status decisions</h2>
+      <p>Each course has a status at your university.</p>
+      <div class="figure wide">
+        <div class="flow">
+          <span class="pill">In the catalogue</span><span class="arrow">→</span>
+          <span class="pill warn">Suggested</span><span class="arrow">→</span>
+          <span class="pill ai">Planned</span><span class="arrow">→</span>
+          <span class="pill ok">Offered here</span><span class="arrow">→</span>
+          <span class="pill danger">Retiring</span>
+        </div>
+        <p class="cap">Status can move in any direction; the arrows show the usual life of a course.</p>
+      </div>
+      <div class="table-wrap wide">
+        <table>
+          <thead><tr><th>Status</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td>In the catalogue</td><td>A known subject the university hasn't decided on. All starter courses begin here</td></tr>
+            <tr><td>Suggested</td><td>Someone thinks the university should teach it</td></tr>
+            <tr><td>Planned</td><td>The university plans to start it</td></tr>
+            <tr><td>Offered here</td><td>Taught now</td></tr>
+            <tr><td>Retiring</td><td>Being phased out; its teachers may need a transition plan</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><b>Who decides:</b> heads for their department's courses, deans for their faculty's, leadership for all; heads and deans can also decide courses not yet assigned to a department. Teachers cannot change status. On the course page, the <b>Status here</b> box takes a status, the responsible department and an optional reason. Every change is kept in a history: who, when, why.</p>
+      <h3>Supporting or opposing a suggestion</h3>
+      <p>While a course is <b>Suggested</b>, anyone can click <b>Support</b> or <b>Oppose</b> on its page (click again to withdraw). Only totals are shown, also in the Insights panel <i>Suggested by teachers</i>, so deciders can see how much backing an idea has. Voting closes when the status changes.</p>
+      <div class="callout"><b>Status and proposals work together</b>Use a policy proposal to argue for a new course or a retirement; once it is adopted, a head, dean or leader records the decision as a status.</div>
+    </section>
+
+    <!-- 9 -->
+    <section class="chapter" id="documents">
+      <p class="eyebrow">Chapter 9</p>
+      <h2>Policy proposals and the course redesign studio</h2>
+      <p>Both work the same way. A <b>proposal</b> starts with the sections Problem, Proposal, Who is affected, How it would work, and Risks and open questions. A <b>redesign</b> starts from a catalogue course with Why redesign, Learning outcomes, Weekly topics, Assessment, AI use policy, and Skills a teacher needs (filled in from the course). Each section shows a guiding prompt until someone writes it.</p>
+      <h3>Editing</h3>
+      <ul>
+        <li>Anyone can edit any section, and anyone can add a section.</li>
+        <li>Every save is kept. <b>History</b> shows each version, with added lines in green and removed lines in red.</li>
+        <li>If someone saved the same section while you were editing, you see their version instead of overwriting it; your text stays in the editor so you can merge.</li>
+      </ul>
+      <h3>Discussing</h3>
+      <ul>
+        <li>Comments are tagged <span class="pill ai">Suggestion</span> <span class="pill ok">Support</span> <span class="pill danger">Concern</span> <span class="pill warn">Question</span> and can be about one section or the whole document.</li>
+        <li>Replies stay one level deep so threads remain readable.</li>
+        <li><b>Post anonymously</b> shows "A colleague" instead of your name, so anyone can raise a concern safely.</li>
+        <li>The document's author, the comment's author or an administrator can mark a comment as addressed.</li>
+      </ul>
+      <h3>Deciding</h3>
+      <ul>
+        <li><b>Stances:</b> I support this / Support with changes / I have concerns. Only totals are shown; click again to withdraw.</li>
+        <li><b>Stages:</b> Drafting → Open for discussion → Submitted to department → Adopted, or Closed. The author or an administrator changes the stage.</li>
+        <li>Each document can belong to a department or the whole university.</li>
+      </ul>
+    </section>
+
+    <!-- 10 -->
+    <section class="chapter" id="insights">
+      <p class="eyebrow">Chapter 10</p>
+      <h2>Insights</h2>
+      <p>Choose a unit under <b>Showing</b> (the units your role allows) and, optionally, a field. Everything is a total; any number below 3 shows as "&lt;3", and detailed panels stay empty until 3 teachers in the unit have added skills.</p>
+      <div class="table-wrap wide">
+        <table>
+          <thead><tr><th>Panel</th><th>What it tells you</th></tr></thead>
+          <tbody>
+            <tr><td>Participation</td><td>Teachers registered, how many added skills, how many rated their course paths</td></tr>
+            <tr><td>Shared training needs</td><td>Skills most often missing between teachers and recent subjects; where to start workshops (<a href="#calc">calculation</a>)</td></tr>
+            <tr><td>Coverage gaps</td><td>Recent subjects nobody here is ready to teach, highest impact first</td></tr>
+            <tr><td>Proposals and redesigns</td><td>How many are at each stage, and recently adopted ones</td></tr>
+            <tr><td>Planned courses</td><td>How many teachers are ready or a short preparation away</td></tr>
+            <tr><td>Retiring courses</td><td>How many teachers can teach them now: colleagues who may need a transition plan</td></tr>
+            <tr><td>Suggested by teachers</td><td>Course ideas waiting for a decision, with support and oppose totals</td></tr>
+            <tr><td>By faculty / by department</td><td>For deans and leadership: participation, recent subjects covered and biggest training need per unit</td></tr>
+            <tr><td>All courses</td><td>Ready, short-prep and stretch counts, the share who said "Makes sense", and how many are interested</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Planned, retiring and suggested panels show courses of the selected unit's departments plus courses not yet assigned to a department.</p>
+    </section>
+
+    <!-- 11 -->
+    <section class="chapter" id="calc">
+      <p class="eyebrow">Chapter 11</p>
+      <h2>How the numbers are calculated</h2>
+      <p>The method is deliberately simple so anyone can check it.</p>
+
+      <h3>1. Credit for each skill a course needs</h3>
+      <div class="table-wrap wide">
+        <table>
+          <thead><tr><th>Your situation</th><th class="num">Credit</th></tr></thead>
+          <tbody>
+            <tr><td>Can teach it</td><td class="num">1.00</td></tr>
+            <tr><td>Use it regularly</td><td class="num">0.70</td></tr>
+            <tr><td>Familiar</td><td class="num">0.35</td></tr>
+            <tr><td>You don't have it, but have a <i>related</i> skill</td><td class="num">0.35 × that skill's credit (at most 0.35)</td></tr>
+            <tr><td>Neither</td><td class="num">0</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>If both apply, the higher credit counts. A skill with credit 0.60 or more counts as "You bring".</p>
+
+      <h3>2. Match</h3>
+      <p>Core skills count 3 times, supporting skills once.</p>
+      <div class="formula">match = (sum of weight × credit) ÷ (sum of weights)</div>
+      <p><b>Ready now:</b> 70% or more and every core skill at 0.60 or more. <b>Short preparation:</b> 45% or more. <b>Stretch:</b> 25% or more.</p>
+
+      <h3>3. Preparation time</h3>
+      <p>Each skill below 0.60 adds the part still missing, weighted:</p>
+      <div class="formula">preparation = sum of weight × (1 − credit), for skills below 0.60</div>
+      <div class="table-wrap wide"><table>
+        <thead><tr><th>Preparation</th><th>Label</th></tr></thead>
+        <tbody><tr><td>0</td><td>ready now</td></tr><tr><td>up to 2.5</td><td>a few weeks</td></tr><tr><td>up to 6</td><td>about one semester</td></tr><tr><td>more than 6</td><td>two semesters or more</td></tr></tbody>
+      </table></div>
+
+      <h3>Worked example</h3>
+      <p>A software-testing teacher (Software testing, Test automation and Java at "can teach it") looks at <i>Testing &amp; Red-Teaming AI Systems</i>.</p>
+      <div class="table-wrap wide">
+        <table>
+          <thead><tr><th>Skill</th><th>Role</th><th class="num">Weight</th><th>Teacher has</th><th class="num">Credit</th><th class="num">Weight × credit</th></tr></thead>
+          <tbody>
+            <tr><td>Model evaluation</td><td>Core</td><td class="num">3</td><td>Related: Software testing</td><td class="num">0.35</td><td class="num">1.05</td></tr>
+            <tr><td>Software testing</td><td>Core</td><td class="num">3</td><td>Can teach it</td><td class="num">1.00</td><td class="num">3.00</td></tr>
+            <tr><td>LLMs &amp; prompt engineering</td><td>Supporting</td><td class="num">1</td><td>No</td><td class="num">0</td><td class="num">0</td></tr>
+            <tr><td>Test automation</td><td>Supporting</td><td class="num">1</td><td>Can teach it</td><td class="num">1.00</td><td class="num">1.00</td></tr>
+            <tr><td>Penetration testing</td><td>Supporting</td><td class="num">1</td><td>Related: Software testing</td><td class="num">0.35</td><td class="num">0.35</td></tr>
+            <tr><td>Ethics in computing</td><td>Supporting</td><td class="num">1</td><td>No</td><td class="num">0</td><td class="num">0</td></tr>
+            <tr><td colspan="2"><b>Total</b></td><td class="num">10</td><td></td><td></td><td class="num"><b>5.40</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Match = 5.40 ÷ 10 = <b>54%</b>, so <b>short preparation</b>. Preparation = 3×0.65 + 1 + 0.65 + 1 = 4.6, so <b>about one semester</b>.</p>
+
+      <h3>4. Skills that open the most doors</h3>
+      <p>For each skill you're missing (credit below 0.60) in your short-preparation and stretch courses, the app adds <code>impact × weight × (1 − credit)</code> and shows the top five. In Explore, courses below the stretch threshold count too.</p>
+
+      <h3>5. Shared training needs</h3>
+      <p>For every teacher in the unit, and every recent subject in their short-preparation or stretch groups, each missing skill gets points:</p>
+      <div class="table-wrap wide">
+        <table>
+          <thead><tr><th>The skill is…</th><th class="num">Teacher doesn't know it</th><th class="num">Teacher knows it a little</th></tr></thead>
+          <tbody>
+            <tr><td>Core to the course</td><td class="num">3 points</td><td class="num">2 points</td></tr>
+            <tr><td>Supporting</td><td class="num">1 point</td><td class="num">0.65 points</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Knowing only a related skill reduces the points a little. Points are added over all teachers; the eight skills with most points are shown, each bar relative to the top one. Unlike your personal list, this is not weighted by impact.</p>
+
+      <h3>6. Privacy thresholds</h3>
+      <ul>
+        <li>Counts from 1 to 2 show as "&lt;3" (the minimum, <code>PRIVACY_MIN_GROUP</code>, defaults to 3).</li>
+        <li>"Makes sense" shares and feedback totals appear only once 3 or more have answered.</li>
+        <li>Training needs, coverage gaps and unit details appear only when 3 or more teachers in that unit have added skills.</li>
+      </ul>
+    </section>
+
+    <!-- 12 -->
+    <section class="chapter" id="impact">
+      <p class="eyebrow">Chapter 12</p>
+      <h2>Impact ratings</h2>
+      <p>Impact estimates how much a subject's value will grow over the next five years. Where possible, starter ratings are anchored to the World Economic Forum's <i>Future of Jobs Report 2025</i>, which names AI and big data, networks and cybersecurity, and technological literacy as the fastest-growing skill areas to 2030, with environmental stewardship newly in the top ten.</p>
+      <div class="table-wrap wide">
+        <table>
+          <thead><tr><th class="num">Rating</th><th>Meaning</th><th>Examples</th></tr></thead>
+          <tbody>
+            <tr><td class="num">5</td><td>Central to the fastest-growing areas</td><td>Machine Learning, MLOps, Data Engineering, Information Security, Business Analytics</td></tr>
+            <tr><td class="num">4</td><td>Closely tied to a growing area, or a foundation for one</td><td>Deep Learning, Computer Networks, Probability &amp; Statistics, Digital Marketing</td></tr>
+            <tr><td class="num">3</td><td>Stable, foundational or more specialised</td><td>Data Structures, Operating Systems, Financial Accounting</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>No starter course is rated 1 or 2: nobody's subject should be labelled low-value without evidence. Ratings without a direct source are marked "Starter rating; review locally". The WEF data is global and about skills and jobs, not courses or any one country, so each university should review the ratings (<a href="#next">chapter 17</a>).</p>
+    </section>
+
+    <!-- 13 -->
+    <section class="chapter" id="data">
+      <p class="eyebrow">Chapter 13</p>
+      <h2>Data and classification</h2>
+      <div class="table-wrap wide">
+        <table>
+          <thead><tr><th>Starter data</th><th class="num">Skills</th><th class="num">Courses</th><th class="num">Of which recent</th></tr></thead>
+          <tbody>
+            <tr><td>Computing</td><td class="num">83</td><td class="num">38</td><td class="num">22</td></tr>
+            <tr><td>Business</td><td class="num">23</td><td class="num">26</td><td class="num">10</td></tr>
+            <tr><td><b>Total</b></td><td class="num"><b>106</b></td><td class="num"><b>64</b></td><td class="num"><b>32</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ul>
+        <li><b>How it was built:</b> by hand, as an informed starting point. Course names follow the ACM/IEEE curriculum guidelines (CS2023 for computing); course–skill links reflect what teaching each course usually needs. Not measured from data.</li>
+        <li><b>Areas and fields:</b> UNESCO ISCED-F 2013, the classification UNESCO, the OECD and Eurostat use. Courses are classified by content, so statistics sits under 0542 Statistics whichever department teaches it; mixed subjects use the inter-disciplinary codes (0688, 0488).</li>
+        <li><b>Skills:</b> one standard name plus other names, the same structure as the EU's ESCO classification. Administrators can import and link ESCO skills with <code>import_esco</code>.</li>
+        <li><b>Skill families:</b> groups for browsing only, chosen by hand; they don't affect matching.</li>
+        <li><b>Related skills:</b> one or two per skill, chosen by judgement; they give partial credit.</li>
+      </ul>
+    </section>
+
+    <!-- 14 -->
+    <section class="chapter" id="practice">
+      <p class="eyebrow">Chapter 14</p>
+      <h2>Best practices</h2>
+      <h3>Teachers</h3>
+      <ul>
+        <li>Spend ten honest minutes on your skills; revisit them each semester.</li>
+        <li>Answer "Does this fit you?" on your top suggestions. It costs a click and improves the catalogue.</li>
+        <li>Treat suggestions as a conversation starter with your head, not a verdict.</li>
+        <li>Use anonymous comments for real concerns, not for attacks.</li>
+      </ul>
+      <h3>Heads and deans</h3>
+      <ul>
+        <li>Record decisions as statuses with a reason, so teachers learn early what is planned or retiring.</li>
+        <li>For every retiring course, check Insights and agree a transition plan with the affected colleagues: target course, skills, a co-teaching semester, support.</li>
+        <li>Turn shared training needs into workshops and pair teachers for co-teaching.</li>
+        <li>Never ask teachers to show you their profiles. The system's value depends on that trust.</li>
+      </ul>
+      <h3>Leadership</h3>
+      <ul>
+        <li>Use proposals for curriculum decisions so affected staff have a voice before, not after.</li>
+        <li>Watch participation first: totals mean little until most teachers take part.</li>
+        <li>Compare coverage gaps with planned courses before approving new programmes.</li>
+      </ul>
+      <h3>Administrators</h3>
+      <ul>
+        <li>Keep the privacy minimum at 3 or higher, and publish who can access the server.</li>
+        <li>Set the email domain and, if needed, approval before announcing the site.</li>
+        <li>Back up the database regularly and keep copies off the server.</li>
+      </ul>
+    </section>
+
+    <!-- 15 -->
+    <section class="chapter" id="admin">
+      <p class="eyebrow">Chapter 15</p>
+      <h2>Administration</h2>
+      <p>Open <code>/admin</code> with an administrator account.</p>
+      <ol class="steps-list">
+        <li><b>Institution:</b> name, short name, logo URL, allowed email domains, approval of new accounts, contact email. The name in <code>.env</code> is used only until this is saved.</li>
+        <li><b>Faculties and departments:</b> add each faculty with its departments.</li>
+        <li><b>Users:</b> set roles (head and dean need a department; a dean sees that department's faculty). Activate accounts waiting for approval with the "Activate selected accounts" action.</li>
+        <li><b>Catalogue:</b> load starter data with <code>seed_catalog</code> (and <code>--file catalog/data/seed_business.json</code>); add disciplines as new data files; import ESCO skills with <code>import_esco</code>.</li>
+        <li><b>Demo:</b> <code>seed_demo</code> creates demo faculties, teachers, a head, a dean and a VC; <code>seed_demo --remove</code> deletes them.</li>
+      </ol>
+      <p>Installation, HTTPS, updates and backups are covered in <code>docs/INSTALL.md</code>.</p>
+    </section>
+
+    <!-- 16 -->
+    <section class="chapter" id="limits">
+      <p class="eyebrow">Chapter 16</p>
+      <h2>Limits</h2>
+      <ul>
+        <li>The starter catalogue and impact ratings are expert judgement, not yet reviewed by faculty or checked against real syllabi or local job data.</li>
+        <li>Matching relies on self-rated skills and on the catalogue's course–skill links; knowing a skill is not the same as being ready to teach it.</li>
+        <li>A course has one status and one responsible department, so a subject taught by several departments needs a separate course per department for now.</li>
+        <li>Notifications appear in the app; email notifications depend on the university's email settings.</li>
+        <li>Fields of study use only ISCED-F broad and detailed levels; each course has one area.</li>
+        <li>The interface is in English only.</li>
+      </ul>
+    </section>
+
+    <!-- 17 -->
+    <section class="chapter" id="next">
+      <p class="eyebrow">Chapter 17</p>
+      <h2>Next steps</h2>
+      <h3>For a university starting out</h3>
+      <ol class="steps-list">
+        <li><b>Pilot</b> with one or two departments and 10–20 teachers for one semester.</li>
+        <li><b>Review the catalogue</b> with 5–8 colleagues per field in two rounds: they rate impact and check skill links, see the first round's results, then rate again.</li>
+        <li><b>Check against reality:</b> tag your own syllabi with skills; count skills in 100–200 local job postings.</li>
+        <li><b>Measure:</b> participation, the share of suggestions rated "Makes sense", training delivered, transition plans agreed for retiring courses.</li>
+        <li><b>Scale</b> to other faculties, adding their disciplines as data files with their own staff.</li>
+      </ol>
+      <h3>For the software</h3>
+      <ul>
+        <li>A status per department, for subjects such as statistics that many departments teach.</li>
+        <li>Notification preferences (which events, and email digests).</li>
+        <li>Linking every skill to ESCO and importing ESCO's lecturer occupations as profile starters.</li>
+        <li>Bengali and other interface languages.</li>
+        <li>Comparing anonymised catalogues across universities.</li>
+      </ul>
+    </section>
+
+    <!-- 18 -->
+    <section class="chapter" id="glossary">
+      <p class="eyebrow">Chapter 18</p>
+      <h2>Glossary</h2>
+      <dl class="glossary">
+        <dt>Area</dt><dd>The ISCED-F 2013 detailed field of a course, e.g. 0411 Accounting and taxation.</dd>
+        <dt>Core skill</dt><dd>A skill essential to teach a course; counts three times as much as a supporting skill.</dd>
+        <dt>Coverage gap</dt><dd>A recent subject nobody in a unit is ready to teach.</dd>
+        <dt>Credit</dt><dd>How much of a skill a teacher has, from 0 to 1.</dd>
+        <dt>ESCO</dt><dd>The EU's multilingual classification of skills and occupations.</dd>
+        <dt>Field of study</dt><dd>The ISCED-F broad field, e.g. Business, administration &amp; law.</dd>
+        <dt>Head start</dt><dd>A skill known a little, or reachable through a related skill.</dd>
+        <dt>Impact</dt><dd>A 1–5 rating of a subject's expected value over the next five years.</dd>
+        <dt>ISCED-F 2013</dt><dd>UNESCO's international classification of fields of education and training.</dd>
+        <dt>Match</dt><dd>The weighted share of a course's skills a teacher already covers.</dd>
+        <dt>Proposed change</dt><dd>A course edit by someone not responsible for the course, waiting for a head, dean or leader to accept it.</dd>
+        <dt>Privacy minimum</dt><dd>The smallest number shown in totals (default 3); smaller numbers are hidden.</dd>
+        <dt>Recent subject</dt><dd>A subject departments are adding in the AI era or for sustainability.</dd>
+        <dt>Related skill</dt><dd>A close skill that gives partial credit.</dd>
+        <dt>Scope</dt><dd>The unit whose totals you are viewing: university, faculty or department.</dd>
+        <dt>Status</dt><dd>Whether the university offers, plans, is retiring or has been asked to teach a course.</dd>
+        <dt>Tier</dt><dd>Ready now, short preparation or stretch.</dd>
+        <dt>Vote</dt><dd>Support or opposition for a suggested course; only totals are shown.</dd>
+      </dl>
+      <footer>
+        Faculty Skills Bridge is open-source software under the GNU Affero General Public License v3.0 or later. This handbook describes version 1. See <code>docs/METHODOLOGY.md</code> for the method in brief and <code>docs/INSTALL.md</code> for installation.
+      </footer>
+    </section>
+  </main>
+</div>
+</body>
+</html>
