@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Propose a skill{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <h1>Propose a new skill</h1>
+    <p>Add a skill the list is missing. Use the name people in your field would recognise, and add other names it goes by so search can find it.</p>
+  </div>
+</div>
+<form method="post" class="form-card">
+  {% csrf_token %}
+  <input type="hidden" name="next" value="{{ next }}">
+  {% include "partials/form_fields.html" %}
+  <div class="row">
+    <button class="btn btn-primary" type="submit">Add skill</button>
+    <a class="btn" href="{% if next %}{{ next }}{% else %}{% url 'catalog:my_skills' %}{% endif %}">Cancel</a>
+  </div>
+</form>
+{% endblock %}

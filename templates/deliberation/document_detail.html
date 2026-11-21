@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}{{ doc.title }}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div class="reading">
+    <p class="eyebrow"><a href="{% url doc.labels.list_url %}">{{ doc.labels.plural }}</a> · <span class="status">{{ doc.get_status_display }}</span></p>
+    <h1>{{ doc.title }}</h1>
+    <p>{{ doc.summary }}</p>
+    <p class="small muted">
+      Started by {{ doc.created_by|default:"a former member" }} · updated {{ doc.updated|naturaltime }} · {{ n_people }} {{ n_people|pluralize:"person,people" }} involved
+      · {% if doc.department %}{{ doc.department.name }}{% else %}Whole university{% endif %}
+      {% if doc.course %} · Course: <a href="{{ doc.course.get_absolute_url }}">{{ doc.course.title }}</a>{% endif %}
+    </p>
+  </div>
+  {% if can_manage %}<a class="btn" href="{% url 'deliberation:edit' doc.pk %}">Edit details</a>{% endif %}
+</div>
+
+<div class="split">
+  <div class="stack loose">
+    {% for s in sections %}
+      <section class="section-block" id="s{{ s.pk }}" aria-labelledby="st{{ s.pk }}">
+        <div class="row between">
+          <h2 id="st{{ s.pk }}">{{ s.title }}</h2>
+          <div class="section-tools">
+            <a href="{% url 'deliberation:section_edit' s.pk %}">Edit</a>
+            <a href="{% url 'deliberation:section_history' s.pk %}">History ({{ s.n_revisions }})</a>
+            <a href="?section={{ s.pk }}#discuss">Comment</a>
+          </div>
+        </div>
+        {% if s.body %}
+          <div class="body">{{ s.body|linebreaks }}</div>
+          {% if s.updated_by %}<p class="small muted">Last edited by {{ s.updated_by }} · {{ s.updated|naturaltime }}</p>{% endif %}
+        {% else %}
+          <p class="placeholder">{{ s.prompt|default:"Nothing written yet." }} <a href="{% url 'deliberation:section_edit' s.pk %}">Write the first draft</a>.</p>
+        {% endif %}
+        {% if s.thread %}
+          <div class="thread">{% for c in s.thread %}{% include "deliberation/_comment.html" %}{% endfor %}</div>
+        {% endif %}
+      </section>
+    {% endfor %}
+
+    <section class="panel" id="discuss" aria-labelledby="discuss-title">
+      <h2 id="discuss-title">Discussion</h2>
+      <nav class="row" aria-label="Filter comments">
+        <a class="btn btn-small" href="?#discuss" aria-pressed="{% if not show %}true{% else %}false{% endif %}">All</a>
+        {% for value, label, n in kind_counts %}
+          <a class="btn btn-small" href="?show={{ value }}#discuss" aria-pressed="{% if show == value %}true{% else %}false{% endif %}">{{ label }} <span class="num">{{ n }}</span></a>
+        {% endfor %}
+      </nav>
+      {% if general %}
+        <div class="thread">{% for c in general %}{% include "deliberation/_comment.html" %}{% endfor %}</div>
+      {% else %}
+        <p class="muted small">No comments on the document as a whole yet. Comments about one section appear under that section.</p>
+      {% endif %}
+      <form method="post" action="{% url 'deliberation:comment' doc.pk %}" class="stack">
+        {% csrf_token %}
+        <h3>Add your perspective</h3>
+        <p class="muted small">Say what you see from where you stand: a student's view, a colleague's workload, a risk others may have missed. Disagreement is welcome; keep it about ideas.</p>
+        {% include "partials/form_fields.html" with form=comment_form %}
+        <div><button class="btn btn-primary" type="submit">Post comment</button></div>
+      </form>
+    </section>
+  </div>
+
+  <aside class="stack sticky">
+    <div class="panel" id="stance">
+      <h2>Where people stand</h2>
+      <div class="stance-bar" aria-hidden="true">
+        {% for value, label, n, pct in stances %}<span class="{{ value }}" style="width: {{ pct }}%"></span>{% endfor %}
+      </div>
+      <div class="legend">
+        {% for value, label, n, pct in stances %}<span><i class="{{ value }}" aria-hidden="true"></i>{{ label }}: <span class="num">{{ n }}</span></span>{% endfor %}
+      </div>
+      <form method="post" action="{% url 'deliberation:stance' doc.pk %}" class="row">
+        {% csrf_token %}
+        {% for value, label, n, pct in stances %}
+          <button class="btn btn-small" type="submit" name="value" value="{{ value }}" aria-pressed="{% if my_stance == value %}true{% else %}false{% endif %}">{{ label }}</button>
+        {% endfor %}
+      </form>
+      <p class="muted small">Only totals are shown. Click your choice again to withdraw it.</p>
+    </div>
+
+    <nav class="panel" aria-label="Sections">
+      <h2>Contents</h2>
+      <ul class="toc">
+        {% for s in sections %}
+          <li><a href="#s{{ s.pk }}"><span>{{ s.title }}</span>{% if s.thread %}<span class="pill">{{ s.thread|length }}</span>{% endif %}</a></li>
+        {% endfor %}
+        <li><a href="#discuss"><span>Discussion</span>{% if general %}<span class="pill">{{ general|length }}</span>{% endif %}</a></li>
+      </ul>
+      <form method="post" action="{% url 'deliberation:section_add' doc.pk %}" class="stack">
+        {% csrf_token %}
+        {% include "partials/form_fields.html" with form=add_section_form %}
+        <div><button class="btn btn-small" type="submit">Add section</button></div>
+      </form>
+    </nav>
+
+    {% if can_manage %}
+      <form method="post" action="{% url 'deliberation:status' doc.pk %}" class="panel">
+        {% csrf_token %}
+        <h2>Status</h2>
+        <div class="field">
+          <label for="status-select">Stage of this {{ doc.labels.singular }}</label>
+          <select name="status" id="status-select">
+            {% for value, label in statuses %}<option value="{{ value }}" {% if value == doc.status %}selected{% endif %}>{{ label }}</option>{% endfor %}
+          </select>
+        </div>
+        <div><button class="btn btn-small" type="submit">Update status</button></div>
+      </form>
+    {% endif %}
+  </aside>
+</div>
+{% endblock %}

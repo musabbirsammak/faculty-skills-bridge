@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}Proposed changes to {{ edit.course.title }}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div class="reading">
+    <p class="eyebrow"><a href="{% url 'catalog:edit_list' %}">Course reviews</a> · {{ edit.get_state_display }}</p>
+    <h1>Proposed changes to {{ edit.course.title }}</h1>
+    <p>Proposed by {{ edit.proposed_by|default:"a former member" }} · {{ edit.created|naturaltime }}{% if edit.note %}. “{{ edit.note }}”{% endif %}</p>
+  </div>
+  <a class="btn" href="{{ edit.course.get_absolute_url }}">Open course</a>
+</div>
+
+{% if diff.fields %}
+  <section class="stack">
+    <h2>Details</h2>
+    <div class="table-wrap">
+      <table class="diff-table">
+        <thead><tr><th>Item</th><th>Now</th><th>Proposed</th></tr></thead>
+        <tbody>{% for label, old, new in diff.fields %}<tr><td>{{ label }}</td><td class="old">{{ old }}</td><td class="new">{{ new }}</td></tr>{% endfor %}</tbody>
+      </table>
+    </div>
+  </section>
+{% endif %}
+
+{% if diff.added or diff.removed or diff.changed %}
+  <section class="stack">
+    <h2>Skills</h2>
+    <div class="table-wrap">
+      <table class="diff-table">
+        <thead><tr><th>Skill</th><th>Change</th></tr></thead>
+        <tbody>
+          {% for name, core in diff.added %}<tr><td>{{ name }}</td><td class="new">Add as {% if core %}core{% else %}supporting{% endif %}</td></tr>{% endfor %}
+          {% for name, core in diff.removed %}<tr><td>{{ name }}</td><td class="old">Remove ({% if core %}core{% else %}supporting{% endif %})</td></tr>{% endfor %}
+          {% for name, core in diff.changed %}<tr><td>{{ name }}</td><td class="new">Make {% if core %}core{% else %}supporting{% endif %}</td></tr>{% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+{% endif %}
+
+{% if not diff.fields and not diff.added and not diff.removed and not diff.changed %}
+  <p class="empty">The course already matches this proposal.</p>
+{% endif %}
+
+{% if can_decide %}
+  <form method="post" class="form-card">
+    {% csrf_token %}
+    <h2>Your decision</h2>
+    <div class="field">
+      <label for="note">Note to the proposer (optional)</label>
+      <input type="text" id="note" name="note" maxlength="255">
+    </div>
+    <div class="row">
+      <button class="btn btn-primary" type="submit" name="decision" value="accept">Accept changes</button>
+      <button class="btn" type="submit" name="decision" value="reject">Don't accept</button>
+    </div>
+  </form>
+{% elif edit.state != "pending" %}
+  <div class="notice">
+    <b>{{ edit.get_state_display }}</b> by {{ edit.decided_by|default:"a former member" }}, {{ edit.decided_at|naturaltime }}{% if edit.decision_note %}: “{{ edit.decision_note }}”{% endif %}
+  </div>
+{% else %}
+  <p class="muted">Waiting for a head, dean or university leader responsible for this course.</p>
+{% endif %}
+{% endblock %}

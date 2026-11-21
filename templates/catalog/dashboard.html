@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}Insights{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <p class="eyebrow">Insights · {{ scope.label }}</p>
+    <h1>What we can teach, and where we need to grow</h1>
+    <p>Totals only. Any number below {{ min_group }} is hidden, so no individual can be singled out. <a href="{% url 'privacy' %}">What can others see?</a></p>
+  </div>
+</div>
+
+<form method="get" class="toolbar">
+  <div class="field" style="flex: 1 1 280px">
+    <label for="scope">Showing</label>
+    <select name="scope" id="scope" data-autosubmit>
+      {% for s in scopes %}<option value="{{ s.key }}" {% if s.key == scope.key %}selected{% endif %}>{% if s.kind == "faculty" %}Faculty: {% elif s.kind == "department" %}— {% endif %}{{ s.label }}</option>{% endfor %}
+    </select>
+  </div>
+  <div class="field" style="flex: 0 1 320px">
+    <label for="field">Courses in</label>
+    <select name="field" id="field" aria-label="Field of study" data-autosubmit>
+      <option value="">All fields</option>
+      {% for value, label in fields %}<option value="{{ value }}" {% if value == field %}selected{% endif %}>{{ label }}</option>{% endfor %}
+    </select>
+  </div>
+  <noscript><button class="btn" type="submit">Apply</button></noscript>
+</form>
+
+<div class="grid-3">
+  <div class="stat"><b>{{ registered }}</b><span>teachers registered</span></div>
+  <div class="stat"><b>{{ n_teachers }}</b><span>have added their skills</span></div>
+  <div class="stat"><b>{{ responded }}</b><span>have rated their course paths</span></div>
+</div>
+
+{% if not enough %}
+  <p class="empty">Detailed totals appear once at least {{ min_group }} teachers here have added their skills.</p>
+{% endif %}
+
+<div class="grid-3">
+  <section class="panel" aria-labelledby="needs-title">
+    <h2 id="needs-title">Shared training needs</h2>
+    <p class="muted small">Skills most often missing between teachers and recent subjects. A good place to start workshops or co-teaching.</p>
+    {% for skill, share in needs %}
+      <div class="stack tight">
+        <span class="small">{{ skill.name }}</span>
+        <div class="bar" aria-hidden="true"><span style="width: {{ share }}%"></span></div>
+      </div>
+    {% empty %}
+      <p class="muted small">Not enough data yet.</p>
+    {% endfor %}
+  </section>
+
+  <section class="panel" aria-labelledby="gaps-title">
+    <h2 id="gaps-title">Coverage gaps</h2>
+    <p class="muted small">Recent subjects nobody here is ready to teach yet, highest impact first.</p>
+    {% for r in coverage_gaps %}
+      <div class="row between">
+        <a href="{{ r.course.get_absolute_url }}">{{ r.course.title }}</a>
+        <span class="pill warn">{{ r.short }} short prep</span>
+      </div>
+    {% empty %}
+      <p class="muted small">{% if enough %}Every recent subject has at least one ready teacher.{% else %}Not enough data yet.{% endif %}</p>
+    {% endfor %}
+  </section>
+
+  <section class="panel" aria-labelledby="docs-title">
+    <h2 id="docs-title">Proposals and redesigns</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Stage</th><th class="num">Proposals</th><th class="num">Redesigns</th></tr></thead>
+        <tbody>
+          {% for label, policy, redesign in doc_rows %}<tr><td>{{ label }}</td><td class="num">{{ policy }}</td><td class="num">{{ redesign }}</td></tr>{% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% if adopted %}
+      <p class="lbl">Recently adopted</p>
+      {% for doc in adopted %}<a href="{{ doc.get_absolute_url }}">{{ doc.title }}</a>{% endfor %}
+    {% endif %}
+  </section>
+</div>
+
+<div class="grid-3">
+  <section class="panel" aria-labelledby="planned-title">
+    <h2 id="planned-title">Planned courses</h2>
+    <p class="muted small">Courses the university plans to start, and how many teachers are ready or a short preparation away.</p>
+    {% for r in planned %}
+      <div class="row between">
+        <a href="{{ r.course.get_absolute_url }}">{{ r.course.title }}</a>
+        <span class="small num">{{ r.ready }} ready · {{ r.short }} short prep</span>
+      </div>
+    {% empty %}
+      <p class="muted small">No planned courses.</p>
+    {% endfor %}
+  </section>
+
+  <section class="panel" aria-labelledby="retiring-title">
+    <h2 id="retiring-title">Retiring courses</h2>
+    <p class="muted small">Courses being phased out, and how many teachers can teach them now. These colleagues may need a transition plan.</p>
+    {% for r in retiring %}
+      <div class="row between">
+        <a href="{{ r.course.get_absolute_url }}">{{ r.course.title }}</a>
+        <span class="small num">{{ r.ready }} can teach it</span>
+      </div>
+    {% empty %}
+      <p class="muted small">No retiring courses.</p>
+    {% endfor %}
+  </section>
+
+  <section class="panel" aria-labelledby="suggested-title">
+    <h2 id="suggested-title">Suggested by teachers</h2>
+    <p class="muted small">Courses someone thinks the university should teach, waiting for a decision.</p>
+    {% for r in suggested %}
+      <div class="row between">
+        <a href="{{ r.course.get_absolute_url }}">{{ r.course.title }}</a>
+        <span class="small num">{{ r.support }} support · {{ r.oppose }} oppose</span>
+      </div>
+    {% empty %}
+      <p class="muted small">No suggestions waiting.</p>
+    {% endfor %}
+  </section>
+</div>
+
+{% if breakdown %}
+  <section class="stack" aria-labelledby="breakdown-title">
+    <h2 id="breakdown-title">By {% if scope.kind == "university" %}faculty{% else %}department{% endif %}</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Unit</th><th class="num">Registered</th><th class="num">Added skills</th><th class="num">Recent subjects covered</th><th>Biggest training need</th><th></th></tr></thead>
+        <tbody>
+          {% for b in breakdown %}
+            <tr>
+              <td>{{ b.scope.label }}</td>
+              <td class="num">{{ b.registered }}</td>
+              <td class="num">{{ b.with_skills }}</td>
+              <td class="num">{% if b.enough %}{{ b.recent_covered }}{% else %}<span class="muted">–</span>{% endif %}</td>
+              <td>{% if b.enough and b.top_need %}{{ b.top_need.name }}{% else %}<span class="muted">–</span>{% endif %}</td>
+              <td><a href="?scope={{ b.scope.key }}{% if field %}&amp;field={{ field }}{% endif %}">Open</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <p class="muted small">"–" means fewer than {{ min_group }} teachers in that unit have added skills.</p>
+  </section>
+{% endif %}
+
+<section class="stack" aria-labelledby="table-title">
+  <h2 id="table-title">All courses</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Course</th><th>Impact</th><th class="num">Ready</th><th class="num">Short prep</th><th class="num">Stretch</th><th class="num">"Makes sense"</th><th class="num">Interested</th></tr>
+      </thead>
+      <tbody>
+        {% for r in rows %}
+          <tr>
+            <td><a href="{{ r.course.get_absolute_url }}">{{ r.course.title }}</a> {% include "partials/status_pill.html" with course=r.course %}{% if r.course.emerging %} <span class="pill ai">Recent</span>{% endif %}</td>
+            <td>{% include "partials/impact.html" with impact=r.course.impact %}</td>
+            <td class="num">{{ r.ready }}</td>
+            <td class="num">{{ r.short }}</td>
+            <td class="num">{{ r.stretch }}</td>
+            <td class="num">{% if r.fit_share is not None %}{{ r.fit_share }}%{% else %}<span class="muted">–</span>{% endif %}</td>
+            <td class="num">{{ r.interested }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <p class="muted small">"Makes sense" is the share of teachers who rated the suggestion as a good fit, shown once {{ min_group }} or more have responded.</p>
+</section>
+{% endblock %}

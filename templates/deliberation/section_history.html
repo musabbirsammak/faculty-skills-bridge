@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}History of {{ section.title }}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <p class="eyebrow"><a href="{{ doc.get_absolute_url }}">{{ doc.title }}</a></p>
+    <h1>History: {{ section.title }}</h1>
+    <p>Every saved version, newest first. Added lines are green, removed lines are red.</p>
+  </div>
+  <a class="btn" href="{% url 'deliberation:section_edit' section.pk %}">Edit section</a>
+</div>
+{% for e in entries %}
+  <section class="stack">
+    <div class="row small">
+      <b>{{ e.rev.author|default:"Former member" }}</b>
+      <span class="muted">{{ e.rev.created|naturaltime }}</span>
+      {% if e.rev.note %}<span class="pill">{{ e.rev.note }}</span>{% endif %}
+    </div>
+    <div class="diff">
+      {% for op, text in e.diff %}<div class="{{ op }}">{% if op == "add" %}+ {% elif op == "del" %}− {% else %}  {% endif %}{{ text }}</div>{% endfor %}
+    </div>
+  </section>
+{% empty %}
+  <p class="empty">No edits yet.</p>
+{% endfor %}
+{% endblock %}

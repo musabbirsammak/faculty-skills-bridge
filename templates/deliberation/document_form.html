@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}{% if doc %}Edit {{ doc.title }}{% else %}{{ labels.new }}{% endif %}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <h1>{% if doc %}Edit details{% else %}{{ labels.new }}{% endif %}</h1>
+    <p>{% if doc %}Change the title or summary.{% else %}Give it a clear title and a short summary. Sections with guiding prompts are created for you; colleagues can add more.{% endif %}</p>
+  </div>
+</div>
+<form method="post" class="form-card">
+  {% csrf_token %}
+  {% include "partials/form_fields.html" %}
+  <div class="row">
+    <button class="btn btn-primary" type="submit">{% if doc %}Save{% else %}Create{% endif %}</button>
+    <a class="btn" href="{% if doc %}{{ doc.get_absolute_url }}{% else %}{% url labels.list_url %}{% endif %}">Cancel</a>
+  </div>
+</form>
+{% endblock %}

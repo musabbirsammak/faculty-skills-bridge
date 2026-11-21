@@ -1,0 +1,40 @@
+{% load humanize %}
+<article class="comment {{ c.kind }}{% if c.resolved %} resolved{% endif %}" id="c{{ c.pk }}">
+  <div class="who">
+    <b>{{ c.shown_author }}</b>
+    <span class="pill">{{ c.get_kind_display }}</span>
+    {% if c.resolved %}<span class="pill ok">Addressed</span>{% endif %}
+    <span>{{ c.created|naturaltime }}</span>
+  </div>
+  <div>{{ c.body|linebreaksbr }}</div>
+  <div class="row small">
+    <details class="reply">
+      <summary>Reply</summary>
+      <form method="post" action="{% url 'deliberation:comment' doc.pk %}">
+        {% csrf_token %}
+        <input type="hidden" name="parent" value="{{ c.pk }}">
+        <select name="kind" aria-label="Type of reply">{% for value, label in reply_kinds %}<option value="{{ value }}">{{ label }}</option>{% endfor %}</select>
+        <textarea name="body" rows="2" required aria-label="Your reply"></textarea>
+        <label class="check"><input type="checkbox" name="anonymous"> Post anonymously</label>
+        <div><button class="btn btn-small btn-primary" type="submit">Reply</button></div>
+      </form>
+    </details>
+    {% if can_manage or c.author_id == user.id %}
+      <form method="post" action="{% url 'deliberation:comment_resolve' c.pk %}">
+        {% csrf_token %}<button class="link-btn" type="submit">{% if c.resolved %}Reopen{% else %}Mark addressed{% endif %}</button>
+      </form>
+    {% endif %}
+  </div>
+  {% with replies=c.replies.all %}
+    {% if replies %}
+      <div class="replies">
+        {% for r in replies %}
+          <article class="comment {{ r.kind }}" id="c{{ r.pk }}">
+            <div class="who"><b>{{ r.shown_author }}</b><span class="pill">{{ r.get_kind_display }}</span><span>{{ r.created|naturaltime }}</span></div>
+            <div>{{ r.body|linebreaksbr }}</div>
+          </article>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+</article>

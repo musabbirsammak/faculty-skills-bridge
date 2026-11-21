@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}{% if course %}Edit {{ course.title }}{% else %}Add a course{% endif %}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <h1>{% if course %}Edit {{ course.title }}{% else %}Add a course{% endif %}</h1>
+    <p>List the skills a teacher needs. Mark the essential ones as core; they count three times as much in matching.</p>
+  </div>
+</div>
+{% if not direct %}
+  <div class="notice reading small"><b>Your changes will be reviewed.</b> Heads, deans or university leadership responsible for this course decide whether to accept them. You'll be notified of the decision.</div>
+{% endif %}
+<form method="post" class="stack loose">
+  {% csrf_token %}
+  <div class="form-card">
+    <h2>About the course</h2>
+    {% include "partials/form_fields.html" %}
+  </div>
+
+  <div class="form-card">
+    <h2>Required skills</h2>
+    {{ formset.management_form }}
+    {% if formset.non_form_errors %}<ul class="errorlist">{% for e in formset.non_form_errors %}<li>{{ e }}</li>{% endfor %}</ul>{% endif %}
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Skill</th><th>Core</th>{% if course %}<th>Remove</th>{% endif %}</tr></thead>
+        <tbody>
+          {% for f in formset %}
+            <tr>
+              <td>{% for h in f.hidden_fields %}{{ h }}{% endfor %}{{ f.skill }}{{ f.skill.errors }}</td>
+              <td>{{ f.core }}</td>
+              {% if course %}<td>{% if f.instance.pk %}{{ f.DELETE }}{% endif %}</td>{% endif %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <p class="muted small">Need more rows? Save, then edit again: four empty rows are added each time. Missing a skill? <a href="{% url 'catalog:skill_create' %}?next={{ request.path|urlencode }}">Propose it first</a>.</p>
+  </div>
+  {% if not direct %}
+    <div class="form-card">
+      <div class="field">
+        <label for="edit_note">Why this change?</label>
+        <input type="text" id="edit_note" name="edit_note" maxlength="255" placeholder="e.g. The course now covers LLM evaluation">
+        <span class="help">Optional, but it helps reviewers decide.</span>
+      </div>
+    </div>
+  {% endif %}
+  <div class="row">
+    <button class="btn btn-primary" type="submit">{% if not direct %}Send for review{% elif course %}Save course{% else %}Suggest course{% endif %}</button>
+    <a class="btn" href="{% if course %}{{ course.get_absolute_url }}{% else %}{% url 'catalog:course_list' %}{% endif %}">Cancel</a>
+  </div>
+</form>
+{% endblock %}

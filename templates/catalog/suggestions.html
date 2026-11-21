@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block title %}Course paths{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <p class="eyebrow">{% if explore_field %}Exploring a new area{% else %}Step 2 of 2{% endif %}</p>
+    <h1>{% if explore_field %}{{ explore_label }}{% else %}Courses you could teach{% endif %}</h1>
+    {% if explore_field %}
+      <p>Every course in this field, closest to your skills first, with what you would need to learn. Nothing is hidden, however far away it is.</p>
+    {% else %}
+      <p>Based on your {{ skill_count }} skill{{ skill_count|pluralize }}. Within each group, subjects with higher expected impact come first. Tell us whether each suggestion fits you: your answers help correct the catalogue for everyone.</p>
+    {% endif %}
+  </div>
+  {% if explore_field %}
+    <a class="btn" href="{% url 'catalog:suggestions' %}">Back to my course paths</a>
+  {% else %}
+    <a class="btn" href="{% url 'catalog:my_skills' %}">Edit my skills</a>
+  {% endif %}
+</div>
+
+{% if not skill_count %}
+  <p class="empty">Add a few skills first. <a href="{% url 'catalog:my_skills' %}">Go to My skills</a>.</p>
+{% else %}
+  <div class="toolbar">
+    {% if not explore_field %}
+      <div class="counts">
+        {% for key, title, desc, cards in tiers %}<span class="count {{ key }}"><b>{{ cards|length }}</b>{{ title|lower }}</span>{% endfor %}
+      </div>
+      <form method="get" class="row">
+        <select name="field" id="field" aria-label="Field of study" data-autosubmit>
+          <option value="">All fields</option>
+          {% for value, label in fields %}<option value="{{ value }}" {% if value == field %}selected{% endif %}>{{ label }}</option>{% endfor %}
+        </select>
+        <label class="check"><input type="checkbox" name="emerging" value="1" {% if emerging_only %}checked{% endif %} data-autosubmit> Recent subjects only</label>
+        <noscript><button class="btn btn-small" type="submit">Apply</button></noscript>
+      </form>
+    {% endif %}
+    <form method="get" class="explore">
+      <label for="explore"><b>Explore a new area</b></label>
+      <select name="explore" id="explore" data-autosubmit>
+        <option value="">Choose a field…</option>
+        {% for value, label in fields %}<option value="{{ value }}" {% if value == explore_field %}selected{% endif %}>{{ label }}</option>{% endfor %}
+      </select>
+      <noscript><button class="btn btn-small" type="submit">Explore</button></noscript>
+    </form>
+  </div>
+
+  <div class="split">
+    <div class="stack loose">
+      {% if explore_field %}
+        {% if explore_cards %}
+          <div class="grid">{% for card in explore_cards %}{% include "catalog/_match_card.html" %}{% endfor %}</div>
+        {% else %}
+          <p class="empty">There are no courses in this field yet. Anyone can <a href="{% url 'catalog:course_create' %}">add one to the catalogue</a>.</p>
+        {% endif %}
+      {% else %}
+        {% for key, title, desc, cards in tiers %}
+          <section aria-labelledby="tier-{{ key }}">
+            <div class="tier-head">
+              <h2 id="tier-{{ key }}"><span class="stripe {{ key }}" aria-hidden="true"></span>{{ title }}</h2>
+              <p>{{ desc }}</p>
+            </div>
+            {% if cards %}
+              <div class="grid">{% for card in cards %}{% include "catalog/_match_card.html" %}{% endfor %}</div>
+            {% else %}
+              <p class="empty">No courses in this group yet.</p>
+            {% endif %}
+          </section>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    <aside class="panel sticky" aria-labelledby="prio-title">
+      <h2 id="prio-title">{% if explore_field %}Where to start{% else %}Skills that open the most doors{% endif %}</h2>
+      <p class="muted small">{% if explore_field %}The skills you're missing that would bring the most high-impact courses in this field within reach.{% else %}Ranked by how much expected impact each skill brings within reach, across your short-preparation and stretch courses.{% endif %}</p>
+      <div>
+        {% for p in priorities %}
+          <div class="priority">
+            <b>{{ p.skill.name }}</b>
+            <span class="pill ai">{{ p.courses|length }} course{{ p.courses|length|pluralize }}</span>
+            <span class="muted small span-all">{% for c in p.courses %}{{ c.title }}{% if not forloop.last %}, {% endif %}{% endfor %}</span>
+          </div>
+        {% empty %}
+          <p class="muted">Nothing to add right now. Your skills already cover the courses within reach.</p>
+        {% endfor %}
+      </div>
+      <p class="muted small">In course cards, bold skills are core to the course.</p>
+    </aside>
+  </div>
+{% endif %}
+{% endblock %}

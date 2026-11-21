@@ -1,0 +1,80 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Home{% endblock %} · Faculty Skills Bridge · {{ institution.short_name|default:institution.name }}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+</head>
+<body>
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="{% url 'home' %}">
+      {% if institution.logo_url %}<img class="brand-logo" src="{{ institution.logo_url }}" alt="">{% else %}<span class="brand-mark" aria-hidden="true"></span>{% endif %}
+      <span class="brand-text"><span>Faculty Skills Bridge</span><small>{{ institution.name }}</small></span>
+    </a>
+    {% if user.is_authenticated %}
+      {% with p=request.path %}
+      <details class="menu" data-dropdown>
+        <summary class="btn menu-button"><span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span></summary>
+        <nav class="menu-panel" aria-label="Main">
+          <div class="menu-group">
+            <p class="menu-heading">Your skills</p>
+            <a href="{% url 'catalog:my_skills' %}" {% if '/skills/mine' in p %}aria-current="page"{% endif %}>My skills<span>What you know, and how well</span></a>
+            <a href="{% url 'catalog:suggestions' %}" {% if '/skills/suggestions' in p %}aria-current="page"{% endif %}>Course paths<span>Courses you could teach</span></a>
+            <a href="{% url 'catalog:course_list' %}" {% if '/skills/courses' in p %}aria-current="page"{% endif %}>Catalogue<span>All courses and their skills</span></a>
+          </div>
+          <div class="menu-group">
+            <p class="menu-heading">Work together</p>
+            <a href="{% url 'deliberation:proposals' %}" {% if '/proposals' in p %}aria-current="page"{% endif %}>Policy proposals<span>Shape department policy</span></a>
+            <a href="{% url 'deliberation:studio' %}" {% if '/studio' in p %}aria-current="page"{% endif %}>Redesign studio<span>Rework courses as a group</span></a>
+          </div>
+          <div class="menu-group">
+            <p class="menu-heading">University</p>
+            <a href="{% url 'catalog:dashboard' %}" {% if '/skills/insights' in p %}aria-current="page"{% endif %}>Insights<span>Totals for your units</span></a>
+            <a href="{% url 'catalog:edit_list' %}" {% if '/skills/reviews' in p %}aria-current="page"{% endif %}>Course reviews<span>Proposed changes to courses</span></a>
+            <a href="{% url 'privacy' %}" {% if '/privacy' in p %}aria-current="page"{% endif %}>Privacy<span>What others can see</span></a>
+            {% if user.is_staff %}<a href="{% url 'admin:index' %}">Administration<span>Institution, units, users</span></a>{% endif %}
+          </div>
+        </nav>
+      </details>
+      {% endwith %}
+      <a class="bell" href="{% url 'notifications:list' %}" aria-label="Notifications{% if unread_notifications %}, {{ unread_notifications }} unread{% endif %}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+        {% if unread_notifications %}<span class="badge">{{ unread_notifications }}</span>{% endif %}
+      </a>
+      <div class="user-box">
+        <a class="user-name" href="{% url 'accounts:profile' %}" title="Your profile">
+          <span class="avatar" aria-hidden="true">{{ user.display_name|default:user.username|first|upper }}</span>
+          <span class="user-label">{{ user }}</span>
+        </a>
+        <form method="post" action="{% url 'accounts:logout' %}">{% csrf_token %}<button class="user-logout" type="submit">Log out</button></form>
+      </div>
+    {% else %}
+      <div class="nav-user">
+        <a href="{% url 'accounts:login' %}">Log in</a>
+        <a class="btn btn-primary btn-small" href="{% url 'accounts:signup' %}">Create account</a>
+      </div>
+    {% endif %}
+  </div>
+</header>
+
+<main class="container page">
+  {% if messages %}
+    <ul class="messages">{% for m in messages %}<li class="{{ m.tags }}">{{ m }}</li>{% endfor %}</ul>
+  {% endif %}
+  {% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="container row between">
+    <span>Built with teachers, not about them. Your skill profile is private; leaders see only totals. <a href="{% url 'privacy' %}">What can others see?</a></span>
+    <span>Faculty Skills Bridge is open-source software (AGPL-3.0), run here by {{ institution.name }}.</span>
+  </div>
+</footer>
+<script src="{% static 'js/app.js' %}" defer></script>
+</body>
+</html>

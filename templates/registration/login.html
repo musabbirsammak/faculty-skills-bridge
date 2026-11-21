@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Log in{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>Log in</h1><p>Welcome back.</p></div></div>
+<form method="post" class="form-card">
+  {% csrf_token %}
+  {% include "partials/form_fields.html" %}
+  <input type="hidden" name="next" value="{{ next }}">
+  <div class="row">
+    <button class="btn btn-primary" type="submit">Log in</button>
+    <span class="muted small">No account yet? <a href="{% url 'accounts:signup' %}">Create one</a>. <a href="{% url 'accounts:password_reset' %}">Forgot your password?</a></span>
+  </div>
+</form>
+{% endblock %}

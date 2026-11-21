@@ -1,0 +1,45 @@
+<article class="card match {{ card.tier }}">
+  <div class="stack tight">
+    <a class="title" href="{{ card.course.get_absolute_url }}"><h3>{{ card.course.title }}</h3></a>
+    <div class="row small">
+      {% include "partials/status_pill.html" with course=card.course %}
+      {% if card.course.emerging %}<span class="pill ai">Recent subject</span>{% endif %}
+      <span class="pill" title="ISCED-F {{ card.course.area }}">{{ card.course.area_name }}</span>
+      {% if user.field and card.course.field != user.field %}<span class="pill warn" title="{{ card.course.get_field_display }}">Outside your field</span>{% endif %}
+      <span class="muted">Impact</span>{% include "partials/impact.html" with impact=card.course.impact %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="meter" aria-hidden="true"><span style="width: {{ card.match.percent }}%"></span></div>
+    <span class="num small">{{ card.match.percent }}% match</span>
+  </div>
+  {% if card.have %}
+    <div><p class="lbl">You bring</p>
+      <ul class="tags have">{% for skill, item in card.have %}<li class="{% if item.core %}core{% endif %}">{{ skill.name }}</li>{% endfor %}</ul>
+    </div>
+  {% endif %}
+  {% if card.head_start %}
+    <div><p class="lbl">Head start</p>
+      <ul class="tags head">{% for skill, item, via in card.head_start %}<li class="{% if item.core %}core{% endif %}">{{ skill.name }} <span class="small">· {% if via %}via {{ via.name }}{% else %}familiar{% endif %}</span></li>{% endfor %}</ul>
+    </div>
+  {% endif %}
+  {% if card.gaps %}
+    <div><p class="lbl">To learn</p>
+      <ul class="tags">{% for skill, item in card.gaps %}<li class="{% if item.core %}core{% endif %}">{{ skill.name }}</li>{% endfor %}</ul>
+    </div>
+  {% endif %}
+  <div>
+    <p class="lbl">Suggested path · {{ card.match.prep_label }}</p>
+    <ol class="steps">{% for step in card.steps %}<li>{{ step }}</li>{% endfor %}</ol>
+  </div>
+  {% if card.course.impact_note %}<p class="small muted">Why it matters: {{ card.course.impact_note }}</p>{% endif %}
+  <form method="post" action="{% url 'catalog:feedback' card.course.id %}" class="feedback js-feedback">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ request.get_full_path }}">
+    <span class="small muted">Does this fit you?</span>
+    {% for value, label in feedback_choices %}
+      <button class="btn btn-small" type="submit" name="response" value="{{ value }}" data-value="{{ value }}"
+              aria-pressed="{% if card.response == value %}true{% else %}false{% endif %}">{{ label }}</button>
+    {% endfor %}
+  </form>
+</article>

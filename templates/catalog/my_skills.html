@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block title %}My skills{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <p class="eyebrow">Step 1 of 2</p>
+    <h1>My skills</h1>
+    <p>Add what you know and how well you know it. Think beyond your course titles: tools, methods, research and industry work all count. Only you can see this list.</p>
+  </div>
+  <a class="btn btn-primary" href="{% url 'catalog:suggestions' %}">See course paths →</a>
+</div>
+
+<div class="split">
+  <div class="stack loose">
+    <form method="post" class="panel" id="add-skill-form">
+      {% csrf_token %}
+      <input type="hidden" name="action" value="add">
+      <input type="hidden" name="skill" id="skill-id">
+      <h2>Add a skill</h2>
+      <div class="form-grid">
+        <div class="field combo">
+          <label for="skill-search">Skill</label>
+          <input type="text" id="skill-search" autocomplete="off" placeholder="e.g. SQL, testing, networking"
+                 role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="skill-options"
+                 data-propose-url="{% url 'catalog:skill_create' %}?next={{ request.path|urlencode }}">
+          <ul class="listbox" id="skill-options" role="listbox" hidden></ul>
+        </div>
+        <div class="field">
+          <label for="add-level">How well</label>
+          <select name="level" id="add-level">
+            {% for value, label in levels %}<option value="{{ value }}" {% if value == "use" %}selected{% endif %}>{{ label }}</option>{% endfor %}
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <button class="btn btn-primary" type="submit">Add skill</button>
+        <span class="muted small">Not in the list? <a href="{% url 'catalog:skill_create' %}?next={{ request.path|urlencode }}">Propose a new skill</a>.</span>
+      </div>
+    </form>
+
+    <section class="stack" aria-labelledby="mine-title">
+      <h2 id="mine-title">Your skills <span class="muted num">({{ mine|length }})</span></h2>
+      {% if mine %}
+        <ul class="skill-list">
+          {% for ts in mine %}
+            <li class="skill-row">
+              <span class="name">{{ ts.skill.name }} <span class="muted small">· {{ ts.skill.get_family_display }}</span></span>
+              <form method="post" class="level">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="level">
+                <input type="hidden" name="id" value="{{ ts.id }}">
+                <select name="level" id="level-{{ ts.id }}" aria-label="How well you know {{ ts.skill.name }}" data-autosubmit>
+                  {% for value, label in levels %}<option value="{{ value }}" {% if value == ts.level %}selected{% endif %}>{{ label }}</option>{% endfor %}
+                </select>
+                <noscript><button class="btn btn-small" type="submit">Save</button></noscript>
+              </form>
+              <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="remove">
+                <input type="hidden" name="id" value="{{ ts.id }}">
+                <button class="icon-btn" type="submit" aria-label="Remove {{ ts.skill.name }}">×</button>
+              </form>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="empty">No skills yet. Add your first one above, or browse by area.</p>
+      {% endif %}
+    </section>
+  </div>
+
+  <aside class="panel sticky" aria-labelledby="browse-title">
+    <h2 id="browse-title">Browse by area</h2>
+    <p class="muted small">Click a skill to add it as "Use it regularly". You can change the level afterwards.</p>
+    <form method="post" class="stack">
+      {% csrf_token %}
+      <input type="hidden" name="action" value="add">
+      <input type="hidden" name="level" value="use">
+      {% for family, items in families %}
+        <details {% if forloop.first %}open{% endif %}>
+          <summary><b>{{ family }}</b> <span class="muted small">({{ items|length }})</span></summary>
+          <div class="row mt-8">
+            {% for skill, owned in items %}
+              <button class="btn btn-small" type="submit" name="skill" value="{{ skill.id }}" {% if owned %}disabled aria-pressed="true"{% endif %}>{{ skill.name }}</button>
+            {% endfor %}
+          </div>
+        </details>
+      {% endfor %}
+    </form>
+  </aside>
+</div>
+{{ skill_data|json_script:"skill-data" }}
+{% endblock %}

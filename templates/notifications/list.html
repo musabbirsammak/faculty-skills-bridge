@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}Notifications{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <h1>Notifications</h1>
+    <p>Changes to courses and documents you are involved in: ones you started, edited, commented on, voted on or proposed changes to.</p>
+  </div>
+  {% if unread_notifications %}
+    <form method="post" action="{% url 'notifications:read_all' %}">{% csrf_token %}<button class="btn" type="submit">Mark all as read</button></form>
+  {% endif %}
+</div>
+{% if notifications %}
+  <ul class="note-list">
+    {% for n in notifications %}
+      <li class="{% if not n.read_at %}unread{% endif %}">
+        <a href="{% url 'notifications:open' n.pk %}">
+          <span>{{ n.message }}</span>
+          <span class="small muted">{{ n.created|naturaltime }}</span>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p class="empty">Nothing yet. You'll be notified when something you're involved in changes.</p>
+{% endif %}
+{% endblock %}

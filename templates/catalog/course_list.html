@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}Catalogue{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <h1>Course catalogue</h1>
+    <p>Every course lists the skills it needs. Anyone can add a course or correct its skills, so the catalogue stays current as subjects change.</p>
+  </div>
+  <a class="btn btn-primary" href="{% url 'catalog:course_create' %}">Add a course</a>
+</div>
+
+<form method="get" class="toolbar">
+  <div class="field" style="flex: 1 1 240px">
+    <label for="q">Search</label>
+    <input type="search" id="q" name="q" value="{{ q }}" placeholder="Course or skill">
+  </div>
+  <div class="field" style="flex: 0 1 260px">
+    <label for="field">Field</label>
+    <select name="field" id="field" aria-label="Field of study">
+        <option value="">All fields</option>
+        {% for value, label in fields %}<option value="{{ value }}" {% if value == field %}selected{% endif %}>{{ label }}</option>{% endfor %}
+      </select>
+  </div>
+  <div class="field" style="flex: 0 1 220px">
+    <label for="area">Area</label>
+    <select id="area" name="area">
+      <option value="">All areas</option>
+      {% for code, label in areas %}<option value="{{ code }}" {% if code == area %}selected{% endif %}>{{ label }}</option>{% endfor %}
+    </select>
+  </div>
+  <div class="field" style="flex: 0 1 200px">
+    <label for="status">Status here</label>
+    <select id="status" name="status">
+      <option value="">Any status</option>
+      {% for value, label in statuses %}<option value="{{ value }}" {% if value == status %}selected{% endif %}>{{ label }}</option>{% endfor %}
+    </select>
+  </div>
+  <label class="check"><input type="checkbox" name="emerging" value="1" {% if emerging %}checked{% endif %}> Recent subjects only</label>
+  <button class="btn" type="submit">Filter</button>
+</form>
+
+{% if rows %}
+  <div class="grid">
+    {% for course, match in rows %}
+      <article class="card">
+        <a class="title" href="{{ course.get_absolute_url }}"><h3>{{ course.title }}</h3></a>
+        <div class="row small">
+          {% include "partials/status_pill.html" %}
+          {% if course.emerging %}<span class="pill ai">Recent subject</span>{% endif %}
+          <span class="pill" title="ISCED-F {{ course.area }}">{{ course.area_name }}</span>
+          <span class="muted">Impact</span>{% include "partials/impact.html" with impact=course.impact %}
+        </div>
+        <p class="small muted">{{ course.get_field_display }}</p>
+        {% if course.description %}<p class="small muted">{{ course.description|truncatewords:24 }}</p>{% endif %}
+        <div class="row between small">
+          <span class="muted">{{ course.n_skills }} skill{{ course.n_skills|pluralize }}</span>
+          {% if match is not None %}<span class="num">Your match {{ match }}%</span>{% endif %}
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+{% else %}
+  <p class="empty">No courses match these filters.</p>
+{% endif %}
+{% endblock %}

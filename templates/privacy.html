@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}What can others see?{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div class="reading">
+    <h1>What can others see?</h1>
+    <p>Teachers only enter honest skills if they can trust how the information is used. This is exactly what each role at {{ institution.name }} can see.</p>
+  </div>
+</div>
+<div class="table-wrap">
+  <table>
+    <thead><tr><th>Information</th><th>You</th><th>Colleagues</th><th>Heads, deans, leadership</th></tr></thead>
+    <tbody>
+      <tr><td>Your skills and levels</td><td>Yes</td><td>No</td><td>No. Only totals, with numbers below {{ min_group }} hidden</td></tr>
+      <tr><td>Your course suggestions</td><td>Yes</td><td>No</td><td>No</td></tr>
+      <tr><td>Your answers to suggestions ("Makes sense", "Interested")</td><td>Yes</td><td>No</td><td>Only totals per course, once {{ min_group }} or more have answered</td></tr>
+      <tr><td>Your comments in proposals and redesigns</td><td>Yes</td><td>Yes, with your name, or as "A colleague" if you post anonymously</td><td>Same as colleagues</td></tr>
+      <tr><td>Your edits to documents</td><td>Yes</td><td>Yes, in the history</td><td>Same as colleagues</td></tr>
+      <tr><td>Your stance on a proposal</td><td>Yes</td><td>Only totals</td><td>Only totals</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="stack reading">
+  <h2>Who can see which totals</h2>
+  <p><b>Teachers</b> see totals for the whole university and for their own department. <b>Heads of department</b> see the same. <b>Deans</b> also see their faculty and each department in it. <b>University leadership</b> sees every faculty and department.</p>
+  <p>Server administrators of this installation can technically access the database. Ask {{ institution.name }} how this is governed{% if institution.contact_email %}: {{ institution.contact_email }}{% endif %}.</p>
+</div>
+{% endblock %}

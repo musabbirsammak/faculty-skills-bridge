@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Edit {{ section.title }}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div class="reading">
+    <p class="eyebrow"><a href="{{ doc.get_absolute_url }}">{{ doc.title }}</a></p>
+    <h1>{{ section.title }}</h1>
+    {% if section.prompt %}<p>{{ section.prompt }}</p>{% endif %}
+  </div>
+</div>
+
+{% if conflict %}
+  <div class="conflict stack reading">
+    <b>{{ conflict.by|default:"Someone" }} saved this section while you were editing.</b>
+    <p>Your text is still in the editor below. Their version is shown here: copy in anything you want to keep, then save again.</p>
+    <div class="diff">{% for line in conflict.theirs.splitlines %}<div>{{ line|default:" " }}</div>{% endfor %}</div>
+  </div>
+{% endif %}
+
+<form method="post" class="form-card">
+  {% csrf_token %}
+  {% include "partials/form_fields.html" %}
+  <p class="muted small">Plain text. Leave a blank line between paragraphs. Every save is kept in the history, so nothing is lost.</p>
+  <div class="row">
+    <button class="btn btn-primary" type="submit">Save section</button>
+    <a class="btn" href="{{ doc.get_absolute_url }}#s{{ section.pk }}">Cancel</a>
+  </div>
+</form>
+{% endblock %}

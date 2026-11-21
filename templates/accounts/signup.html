@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Create account{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <h1>Create your account</h1>
+    <p>Register with your {{ institution.name }} email address.</p>
+  </div>
+</div>
+<div class="notice reading small">
+  <b>What others can see.</b> Your skill profile is visible only to you. Heads, deans and university leaders see totals only,
+  and any number below {{ privacy_min_group }} is hidden. Colleagues see your display name when you comment, unless you post anonymously.
+  <a href="{% url 'privacy' %}">Full details</a>.
+</div>
+<form method="post" class="form-card">
+  {% csrf_token %}
+  {% include "partials/form_fields.html" %}
+  <div class="row">
+    <button class="btn btn-primary" type="submit">Create account</button>
+    <span class="muted small">Already registered? <a href="{% url 'accounts:login' %}">Log in</a>.</span>
+  </div>
+</form>
+{% endblock %}

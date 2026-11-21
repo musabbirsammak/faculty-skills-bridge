@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}{{ labels.plural }}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <h1>{{ labels.plural }}</h1>
+    <p>{{ labels.intro }}</p>
+  </div>
+  <a class="btn btn-primary" href="{% url labels.create_url %}">{{ labels.new }}</a>
+</div>
+
+<nav class="row" aria-label="Filter by status">
+  <a class="btn btn-small" href="?" aria-pressed="{% if not status %}true{% else %}false{% endif %}">All</a>
+  {% for value, label in statuses %}
+    <a class="btn btn-small" href="?status={{ value }}" aria-pressed="{% if status == value %}true{% else %}false{% endif %}">{{ label }}</a>
+  {% endfor %}
+</nav>
+
+{% if docs %}
+  <div class="grid">
+    {% for doc in docs %}
+      <article class="card doc-card">
+        <div class="row between">
+          <span class="pill {% if doc.status == 'adopted' %}ok{% elif doc.status == 'submitted' %}ai{% elif doc.status == 'closed' %}{% else %}warn{% endif %}">{{ doc.get_status_display }}</span>
+          <span class="small muted">updated {{ doc.updated|naturaltime }}</span>
+        </div>
+        <a class="title" href="{{ doc.get_absolute_url }}"><h3>{{ doc.title }}</h3></a>
+        <p class="small muted">{{ doc.summary|truncatewords:30 }}</p>
+        <div class="meta">
+          <span>{% if doc.department %}{{ doc.department.name }}{% else %}Whole university{% endif %}</span>
+          {% if doc.course %}<span>Course: {{ doc.course.title }}</span>{% endif %}
+          <span>{{ doc.n_sections }} section{{ doc.n_sections|pluralize }}</span>
+          <span>{{ doc.n_comments }} comment{{ doc.n_comments|pluralize }}</span>
+          <span>Started by {{ doc.created_by|default:"a former member" }}</span>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+{% else %}
+  <p class="empty">No {{ labels.singular }}s here yet. <a href="{% url labels.create_url %}">Start the first one</a>.</p>
+{% endif %}
+{% endblock %}

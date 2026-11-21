@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}{{ course.title }}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <p class="eyebrow"><a href="{% url 'catalog:course_list' %}">Catalogue</a> · {{ course.get_field_display }} · {{ course.area }} {{ course.area_name }}</p>
+    <h1>{{ course.title }}</h1>
+    {% if course.description %}<p>{{ course.description }}</p>{% endif %}
+  </div>
+  <div class="row">
+    <a class="btn" href="{% url 'catalog:course_edit' course.pk %}">{% if can_set_status %}Edit course{% else %}Propose changes{% endif %}</a>
+    <a class="btn btn-primary" href="{% url 'deliberation:redesign_create' %}?course={{ course.pk }}">Start a redesign</a>
+  </div>
+</div>
+
+{% if pending_edits %}
+  <div class="notice">
+    <b>Changes waiting for review.</b>
+    {% for e in pending_edits %}<a href="{{ e.get_absolute_url }}">Proposed by {{ e.proposed_by|default:"a former member" }}, {{ e.created|naturaltime }}</a>{% if not forloop.last %} · {% endif %}{% endfor %}
+  </div>
+{% endif %}
+
+<div class="split">
+  <div class="stack loose">
+    <section class="stack" aria-labelledby="req-title">
+      <h2 id="req-title">Skills this course needs</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Skill</th><th>Role</th><th>Your level</th></tr></thead>
+          <tbody>
+            {% for req, level in requirements %}
+              <tr>
+                <td>{{ req.skill.name }}</td>
+                <td>{% if req.core %}<span class="pill ok">Core</span>{% else %}<span class="pill">Supporting</span>{% endif %}</td>
+                <td>{% if level %}{{ level }}{% else %}<span class="muted">Not in your profile</span>{% endif %}</td>
+              </tr>
+            {% empty %}
+              <tr><td colspan="3" class="muted">No skills yet. <a href="{% url 'catalog:course_edit' course.pk %}">Add some</a>.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="stack" aria-labelledby="redesign-title">
+      <h2 id="redesign-title">Redesigns in the studio</h2>
+      {% for doc in redesigns %}
+        <a class="card title" href="{{ doc.get_absolute_url }}"><b>{{ doc.title }}</b><span class="muted small">{{ doc.get_status_display }} · updated {{ doc.updated|naturaltime }}</span></a>
+      {% empty %}
+        <p class="empty">No one has started a redesign of this course yet.</p>
+      {% endfor %}
+    </section>
+  </div>
+
+  <aside class="stack">
+    {% if course.status == "suggested" or votes %}
+      <div class="panel" id="votes">
+        <h2>Should we teach this?</h2>
+        {% with support=votes.support|default:0 oppose=votes.oppose|default:0 %}
+          <div class="vote-bar" aria-hidden="true">
+            {% if support or oppose %}<span class="support" style="flex: {{ support }}"></span><span class="oppose" style="flex: {{ oppose }}"></span>{% endif %}
+          </div>
+          <div class="row between small"><span>{{ support }} support</span><span>{{ oppose }} oppose</span></div>
+        {% endwith %}
+        {% if course.status == "suggested" %}
+          <form method="post" action="{% url 'catalog:course_vote' course.pk %}" class="row">
+            {% csrf_token %}
+            <button class="btn btn-small" type="submit" name="value" value="support" aria-pressed="{% if my_vote == 'support' %}true{% else %}false{% endif %}">Support</button>
+            <button class="btn btn-small" type="submit" name="value" value="oppose" aria-pressed="{% if my_vote == 'oppose' %}true{% else %}false{% endif %}">Oppose</button>
+          </form>
+          <p class="muted small">Only totals are shown. Click your choice again to withdraw it. Explain your view in a policy proposal if it needs discussion.</p>
+        {% else %}
+          <p class="muted small">Voting closed when the course stopped being a suggestion.</p>
+        {% endif %}
+      </div>
+    {% endif %}
+    <div class="panel" id="status">
+      <h2>Status here</h2>
+      <div class="row">{% include "partials/status_pill.html" %}{% if course.status == "catalogue" %}<span class="pill">In the catalogue</span>{% endif %}
+        <span class="muted small">{% if course.department %}{{ course.department.name }}{% else %}No department yet{% endif %}</span></div>
+      <p class="muted small">{% if course.status == "catalogue" %}A known subject that {{ institution.name }} has not decided on.{% elif course.status == "suggested" %}Someone thinks the university should teach this.{% elif course.status == "planned" %}The university plans to start teaching this.{% elif course.status == "offered" %}Taught here now.{% else %}Being phased out. Teachers of this course may want to look at their course paths.{% endif %}</p>
+      {% if can_set_status %}
+        <form method="post" action="{% url 'catalog:course_status' course.pk %}" class="stack">
+          {% csrf_token %}
+          {% include "partials/form_fields.html" with form=status_form %}
+          <div><button class="btn btn-small btn-primary" type="submit">Update status</button></div>
+        </form>
+      {% else %}
+        <p class="muted small">Heads, deans and university leadership decide the status.</p>
+      {% endif %}
+      {% if history %}
+        <p class="lbl">History</p>
+        {% for h in history %}
+          <p class="small"><b>{{ h.get_new_status_display }}</b> <span class="muted">by {{ h.changed_by|default:"a former member" }}, {{ h.created|naturaltime }}{% if h.department %} · {{ h.department.name }}{% endif %}</span>{% if h.note %}<br><span class="muted">{{ h.note }}</span>{% endif %}</p>
+        {% endfor %}
+      {% endif %}
+    </div>
+    <div class="panel">
+      <h2>Expected impact</h2>
+      <div class="row">{% include "partials/impact.html" with impact=course.impact %}<span class="num">{{ course.impact }} / 5</span>{% if course.emerging %}<span class="pill ai">Recent subject</span>{% endif %}</div>
+      {% if course.impact_note %}<p>{{ course.impact_note }}</p>{% endif %}
+      {% if course.source %}<p class="muted small">Source: {{ course.source }}</p>{% endif %}
+      <p class="muted small">Ratings are a starting point. If you disagree, edit the course and explain why in the note.</p>
+    </div>
+    {% if my_match %}
+      <div class="panel">
+        <h2>Your match</h2>
+        <div class="row"><div class="meter" aria-hidden="true"><span style="width: {{ my_match.percent }}%"></span></div><span class="num">{{ my_match.percent }}%</span></div>
+        <p class="muted small">{% if my_match.tier %}Preparation: {{ my_match.prep_label }}.{% else %}Below the stretch threshold for now.{% endif %}</p>
+      </div>
+    {% endif %}
+    <div class="panel">
+      <h2>What colleagues think</h2>
+      {% if feedback_rows %}
+        {% for label, n in feedback_rows %}<div class="row between"><span>{{ label }}</span><span class="num">{{ n }}</span></div>{% endfor %}
+      {% else %}
+        <p class="muted small">Totals appear once at least {{ min_group }} colleagues have responded ({{ feedback_total }} so far).</p>
+      {% endif %}
+    </div>
+  </aside>
+</div>
+{% endblock %}

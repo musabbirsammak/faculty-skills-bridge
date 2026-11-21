@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}Course reviews{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <h1>Course reviews</h1>
+    <p>Changes teachers have proposed to courses you are responsible for.</p>
+  </div>
+</div>
+<section class="stack">
+  <h2>Waiting for your decision</h2>
+  {% for e in to_decide %}
+    <a class="card title" href="{{ e.get_absolute_url }}">
+      <b>{{ e.course.title }}</b>
+      <span class="muted small">Proposed by {{ e.proposed_by|default:"a former member" }}, {{ e.created|naturaltime }}{% if e.note %} · “{{ e.note }}”{% endif %}</span>
+    </a>
+  {% empty %}
+    <p class="empty">Nothing waiting for you.</p>
+  {% endfor %}
+</section>
+<section class="stack">
+  <h2>Your proposals</h2>
+  {% for e in mine %}
+    <a class="card title" href="{{ e.get_absolute_url }}">
+      <b>{{ e.course.title }}</b>
+      <span class="muted small">{{ e.get_state_display }} · {{ e.created|naturaltime }}</span>
+    </a>
+  {% empty %}
+    <p class="empty">You haven't proposed any changes.</p>
+  {% endfor %}
+</section>
+{% endblock %}

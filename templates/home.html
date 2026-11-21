@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<section class="hero">
+  <div>
+    <p class="eyebrow">For university teachers facing curriculum change</p>
+    <h1>When the curriculum changes, no teacher should be left behind.</h1>
+    <p class="lead">See which courses your skills can carry you to and what to learn next. Then shape department policy and redesign courses together with your colleagues, in one shared space.</p>
+    <div class="row mt-8">
+      {% if user.is_authenticated %}
+        {% if has_skills %}
+          <a class="btn btn-primary" href="{% url 'catalog:suggestions' %}">See my course paths</a>
+          <a class="btn" href="{% url 'catalog:my_skills' %}">Update my skills</a>
+        {% else %}
+          <a class="btn btn-primary" href="{% url 'catalog:my_skills' %}">Add my skills</a>
+        {% endif %}
+      {% else %}
+        <a class="btn btn-primary" href="{% url 'accounts:signup' %}">Create an account</a>
+        <a class="btn" href="{% url 'accounts:login' %}">Log in</a>
+      {% endif %}
+    </div>
+  </div>
+  <div class="stats">
+    <div class="stat"><b>{{ stats.courses }}</b><span>courses in the catalogue</span></div>
+    <div class="stat"><b>{{ stats.teachers }}</b><span>teachers mapping their skills</span></div>
+    <div class="stat"><b>{{ stats.proposals }}</b><span>policy proposals</span></div>
+    <div class="stat"><b>{{ stats.redesigns }}</b><span>course redesigns</span></div>
+  </div>
+</section>
+
+<section class="grid-3" aria-label="What you can do">
+  <article class="card pillar">
+    <p class="eyebrow">1 · Skills to course paths</p>
+    <h2>Find where your skills lead</h2>
+    <p class="muted">Add your skills and get three kinds of suggestions: courses you can teach now, after a short preparation, or as a stretch. Recent, high-impact subjects come first.</p>
+    {% if user.is_authenticated %}<a href="{% url 'catalog:my_skills' %}">Start with your skills →</a>{% endif %}
+  </article>
+  <article class="card pillar warn">
+    <p class="eyebrow">2 · Policy proposals</p>
+    <h2>Write policy together</h2>
+    <p class="muted">Draft proposals section by section. Anyone can edit, every version is kept, and comments are tagged as suggestions, support, concerns or questions.</p>
+    {% if user.is_authenticated %}<a href="{% url 'deliberation:proposals' %}">Open proposals →</a>{% endif %}
+  </article>
+  <article class="card pillar ai">
+    <p class="eyebrow">3 · Course redesign studio</p>
+    <h2>Redesign courses as a group</h2>
+    <p class="muted">Rework outcomes, topics, assessment and AI-use rules with colleagues. Many perspectives catch what one designer would miss.</p>
+    {% if user.is_authenticated %}<a href="{% url 'deliberation:studio' %}">Open the studio →</a>{% endif %}
+  </article>
+</section>
+
+{% if user.is_authenticated %}
+  <section class="panel" aria-labelledby="recent-title">
+    <h2 id="recent-title">What colleagues are discussing</h2>
+    {% for c in recent_comments %}
+      <div class="row between">
+        <span><b>{{ c.shown_author }}</b> <span class="muted">· {{ c.get_kind_display|lower }} on</span> <a href="{{ c.document.get_absolute_url }}#c{{ c.pk }}">{{ c.document.title }}</a>{% if c.section %} <span class="muted">({{ c.section.title }})</span>{% endif %}</span>
+        <span class="small muted">{{ c.created|naturaltime }}</span>
+      </div>
+    {% empty %}
+      <p class="muted">No discussion yet. Start a <a href="{% url 'deliberation:proposal_create' %}">proposal</a> or a <a href="{% url 'deliberation:redesign_create' %}">redesign</a>.</p>
+    {% endfor %}
+  </section>
+{% endif %}
+
+<section class="grid-3" aria-label="Principles">
+  <div class="stack tight"><h3>Private by default</h3><p class="muted small">Your skill profile is yours. No one else sees it, including university leadership.</p></div>
+  <div class="stack tight"><h3>Totals, not individuals</h3><p class="muted small">Heads, deans and leadership see only totals, and small numbers that could point to a person are hidden. <a href="{% url 'privacy' %}">Details</a>.</p></div>
+  <div class="stack tight"><h3>Built by its users</h3><p class="muted small">Teachers add courses and skills, rate suggestions and correct the catalogue as subjects change.</p></div>
+</section>
+{% endblock %}
